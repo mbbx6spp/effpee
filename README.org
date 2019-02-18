@@ -3,47 +3,22 @@
 ** Purpose
 
 Effpee includes source code examples, teaching exercises, and course materials (e.g.
-slides, cheatsheets) developed by Susan Potter in her spare time based teaching typed
-functional programming with Haskell to mentees and coworkers over the last six
-years.
+slides, cheatsheets).
 
 ** Status
 
 In development.
 
-** Copyright & license
+** Related works and inspirations
 
-- Copyright &copy; 2017-2019 Susan Potter.
-- Source code and exercises are licensed under the AGPLv3.
-- Slides, reference material and documentation are licensed under the license
-  [[https://creativecommons.org/licenses/by-nc-sa/4.0/][Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)]].
+TODO: Document where exercises, slide deck or reference materials came from when
+relevant.
 
-*** Source code licensing summary (AGPLv3)
-
-You can distribute modified versions if you keep track of the changes and the date you
-made them. As per usual with GNU licenses, you must license derivatives under AGPL. It
-provides the same restrictions and freedoms as the GPLv3 but with an additional clause
-which makes it so that source code must be distributed along with web publication.
-Since web sites and services are never distributed in the traditional sense, the AGPL
-is the GPL of the web.
-
-(Taken from TL;DRLegal [[https://tldrlegal.com/license/gnu-affero-general-public-license-v3-(agpl-3.0)][here]]. Local license copy available [[etc/LICENSE-AGPLv3.txt][etc/LICENSE-AGPLv3.txt]].)
-
-*** Documentation licensing summary (CC BY-NC-SA 4.0)
-
-You are free to:
-- *Share*: copy and redistribute the material in any medium or format
-- *Adapt*: remix, transform, and build upon the material
-
-Under the following terms:
-- *Attribution*: You must give appropriate credit, provide a link to the license, and
-  indicate if changes were made. You may do so in any reasonable manner, but not in
-  any way that suggests the licensor endorses you or your use.
-- *NonCommercial*: You may not use the material for commercial purposes.
-- *ShareAlike*: If you remix, transform, or build upon the material, you must
-  distribute your contributions under the same license as the original.
-- *No additional restrictions*: You may not apply legal terms or technological
-  measures that legally restrict others from doing anything the license permits.
+Short-list so far:
+- Data61's fp-course
+- @nomeata's Ready Haskell
+- Graham Hutton's Haskell book
+- Richard Bird book on functional pearls of algorithmic design
 
 ** Getting Started
 
@@ -161,14 +136,37 @@ to fusion, inlining, or specialization.
 TODO: document how to run benchmarks that determine algorithmic or efficiency
 correctness.
 
-** Related works and inspirations
+** Copyright & license
 
-TODO: Document where exercises, slide deck or reference materials came from when
-relevant.
+- Copyright &copy; 2017-2019 Susan Potter.
+- Source code and exercises are licensed under the AGPLv3.
+- Slides, reference material and documentation are licensed under the license
+  [[https://creativecommons.org/licenses/by-nc-sa/4.0/][Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)]].
 
-Short-list so far:
-- Data61's fp-course
-- @nomeata's Ready Haskell
-- Graham Hutton's Haskell book
-- Richard Bird book on functional pearls of algorithmic design
+*** Source code licensing summary (AGPLv3)
+
+You can distribute modified versions if you keep track of the changes and the date you
+made them. As per usual with GNU licenses, you must license derivatives under AGPL. It
+provides the same restrictions and freedoms as the GPLv3 but with an additional clause
+which makes it so that source code must be distributed along with web publication.
+Since web sites and services are never distributed in the traditional sense, the AGPL
+is the GPL of the web.
+
+(Taken from TL;DRLegal [[https://tldrlegal.com/license/gnu-affero-general-public-license-v3-(agpl-3.0)][here]]. Local license copy available [[etc/LICENSE-AGPLv3.txt][etc/LICENSE-AGPLv3.txt]].)
+
+*** Documentation licensing summary (CC BY-NC-SA 4.0)
+
+You are free to:
+- *Share*: copy and redistribute the material in any medium or format
+- *Adapt*: remix, transform, and build upon the material
+
+Under the following terms:
+- *Attribution*: You must give appropriate credit, provide a link to the license, and
+  indicate if changes were made. You may do so in any reasonable manner, but not in
+  any way that suggests the licensor endorses you or your use.
+- *NonCommercial*: You may not use the material for commercial purposes.
+- *ShareAlike*: If you remix, transform, or build upon the material, you must
+  distribute your contributions under the same license as the original.
+- *No additional restrictions*: You may not apply legal terms or technological
+  measures that legally restrict others from doing anything the license permits.
 

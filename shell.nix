@@ -17,15 +17,6 @@ let
     effpee = self.callPackage ./package.nix {};
   });
 
-  texliveEnv = texlive.combine {
-    inherit (texlive)
-              beamer beamertheme-metropolis pgf pgfopts pdfpages pdftools
-              listings collection-fontsrecommended collection-mathscience
-              collection-xetex fancyvrb fontspec caption tikz-cd fira
-              etoolbox trimspaces environ ulem capt-of wrapfig tcolorbox
-              booktabs translator;
-  };
-
   # Add development tools on top of the package dependencies since the package build shouldn't depend on dev tools
   haskellDevEnv = haskellPkgs.ghcWithPackages (p: with p; [
     ghcid
@@ -43,8 +34,6 @@ in haskellPkgs.shellFor {
     cabal2nix
     bats
     haskellDevEnv
-    texliveEnv
-    pythonPackages.pygments
   ];
   withHoogle = true;
 }
