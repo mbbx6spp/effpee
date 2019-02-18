@@ -1,0 +1,4 @@
+module Effpee.Functor
+  (
+  ) where
+

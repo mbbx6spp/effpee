@@ -1,0 +1,17 @@
+ - functions:
+   - {name: error, within: [Effpee]}
+   - {name: unsafePerformIO, within: []}
+   - {name: trace, within: []}
+   - {name: traceM, within: []}
+   - {name: traceShowM, within: []}
+   - {name: traceShow, within: []}
+   - {name: traceShowId, within: []}
+   - {name: tracePretty, within: []}
+   - {name: tracePrettyId, within: []}
+   - {name: undefined, within: []}
+ - group: { name: generalise, enabled: true }
+ - group: { name: dollar, enabled: true }
+ - error: { lhs: a <=< b, rhs: b >=> a, name: "Left to right monad operations" }
+ - error: { lhs: a =<< b, rhs: b >>= a, name: "Left to right monad operations" }
+ - error: { lhs: "(a =<<)", rhs: "(>>= a)", name: "Left to right monad operations" }
+ - warn: { lhs: "error (mconcat [\"TODO \", a])", rhs: "todo a" }

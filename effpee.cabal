@@ -1,0 +1,92 @@
+cabal-version:        2.2
+name:                 effpee
+version:              0.1.4
+license:              AGPL-3.0-only
+license-file:         etc/LICENSE-AGPLv3.txt
+maintainer:           Susan Potter
+synopsis:             Exercises for teaching typed functional programming
+category:             Education
+description:          Exercises for teaching typed functional programming
+homepage:             https://github.com/mbbx6spp/effpee
+bug-reports:          https://github.com/mbbx6spp/effpee/issues
+build-type:           Simple
+tested-with:          GHC == 8.4.4
+extra-source-files:   CHANGELOG.org
+
+-- source-repository     HEAD
+--   location:           ./.
+
+common base
+  build-depends:
+    base < 5 && >= 4
+    , containers >= 0.4
+    , array >= 0.4
+    , text
+  ghc-options:
+    -Wall
+    -Wno-dodgy-exports
+    -fwarn-incomplete-uni-patterns
+    -fno-warn-unused-binds
+    -fno-warn-unused-do-bind
+    -fno-warn-unused-imports
+    -fno-warn-type-defaults
+    -ferror-spans
+  default-extensions:
+    NoImplicitPrelude
+    InstanceSigs
+    OverloadedStrings
+    ScopedTypeVariables
+  default-language:
+    Haskell2010
+
+common tests
+  other-modules:
+    Effpee.Test
+    Effpee.ADTTest
+    Effpee.USMoneyTest
+    Effpee.OptionTest
+    Effpee.ManyTest
+    Effpee.OrTest
+    Effpee.PairTest
+    Effpee.DeferredTest
+    Effpee.FunctorTest
+  build-depends:
+    effpee
+    , base < 5 && >= 4
+    , text
+    , HUnit >= 1.5
+    , hedgehog >= 0.6.1
+    , tasty >= 1
+    , tasty-hunit >= 0.9
+    , tasty-hedgehog >= 0.2
+  ghc-options:
+    -threaded
+  default-extensions:
+    NoImplicitPrelude
+    InstanceSigs
+    OverloadedStrings
+    ScopedTypeVariables
+  default-language:
+    Haskell2010
+
+library
+  import:
+    base
+  hs-source-dirs:
+    src
+  exposed-modules:
+    Effpee
+    Effpee.ADT
+    Effpee.USMoney
+    Effpee.Option
+    Effpee.Many
+    Effpee.Or
+    Effpee.Pair
+    Effpee.Deferred
+    Effpee.Functor
+
+test-suite all
+  import: tests
+  type: exitcode-stdio-1.0
+  hs-source-dirs: test
+  main-is: TastyLoader.hs

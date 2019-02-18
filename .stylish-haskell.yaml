@@ -1,0 +1,45 @@
+steps:
+  # Convert some ASCII sequences to their Unicode equivalents. This is disabled
+  # by default.
+  # - unicode_syntax:
+  #     # In order to make this work, we also need to insert the UnicodeSyntax
+  #     # language pragma. If this flag is set to true, we insert it when it's
+  #     # not already present. You may want to disable it if you configure
+  #     # language extensions using some other method than pragmas. Default:
+  #     # true.
+  #     add_language_pragma: true
+
+  # Align the right hand side of some elements.  This is quite conservative
+  # and only applies to statements where each element occupies a single
+  # line.
+  - simple_align:
+      cases: true
+      top_level_patterns: true
+      records: true
+
+  # Import cleanup
+  - imports:
+      align: group
+      list_align: after_alias
+      long_list_align: multiline
+      empty_list_align: inherit
+      list_padding: module_name
+      separate_lists: true
+
+  # Language pragmas
+  - language_pragmas:
+      style: vertical
+      align: true
+      remove_redundant: true
+
+  # Replace tabs by spaces. This is disabled by default.
+  - tabs:
+      spaces: 2
+
+  # Remove trailing whitespace
+  - trailing_whitespace: {}
+
+# A common setting is the number of columns (parts of) code will be wrapped
+# to. Different steps take this into account. Default: 80.
+columns: 120
+newline: lf

@@ -1,0 +1,174 @@
+* Effpee
+
+** Purpose
+
+Effpee includes source code examples, teaching exercises, and course materials (e.g.
+slides, cheatsheets) developed by Susan Potter in her spare time based teaching typed
+functional programming with Haskell to mentees and coworkers over the last six
+years.
+
+** Status
+
+In development.
+
+** Copyright & license
+
+- Copyright &copy; 2017-2019 Susan Potter.
+- Source code and exercises are licensed under the AGPLv3.
+- Slides, reference material and documentation are licensed under the license
+  [[https://creativecommons.org/licenses/by-nc-sa/4.0/][Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)]].
+
+*** Source code licensing summary (AGPLv3)
+
+You can distribute modified versions if you keep track of the changes and the date you
+made them. As per usual with GNU licenses, you must license derivatives under AGPL. It
+provides the same restrictions and freedoms as the GPLv3 but with an additional clause
+which makes it so that source code must be distributed along with web publication.
+Since web sites and services are never distributed in the traditional sense, the AGPL
+is the GPL of the web.
+
+(Taken from TL;DRLegal [[https://tldrlegal.com/license/gnu-affero-general-public-license-v3-(agpl-3.0)][here]]. Local license copy available [[etc/LICENSE-AGPLv3.txt][etc/LICENSE-AGPLv3.txt]].)
+
+*** Documentation licensing summary (CC BY-NC-SA 4.0)
+
+You are free to:
+- *Share*: copy and redistribute the material in any medium or format
+- *Adapt*: remix, transform, and build upon the material
+
+Under the following terms:
+- *Attribution*: You must give appropriate credit, provide a link to the license, and
+  indicate if changes were made. You may do so in any reasonable manner, but not in
+  any way that suggests the licensor endorses you or your use.
+- *NonCommercial*: You may not use the material for commercial purposes.
+- *ShareAlike*: If you remix, transform, or build upon the material, you must
+  distribute your contributions under the same license as the original.
+- *No additional restrictions*: You may not apply legal terms or technological
+  measures that legally restrict others from doing anything the license permits.
+
+** Getting Started
+
+*** Conduct prerequisites
+
+To engage with the project maintainers, contributors, or via our official community
+forums please review our Code of Conduct provided at [[etc/CONDUCT.org][etc/CONDUCT.org]] or [[https://www.contributor-covenant.org/version/1/4/code-of-conduct][online]].
+
+*** Software prerequisites
+
+If using Nix shell to load the development environment defined in =shell.nix= you
+should have no problem reproducing the intended environment for these learning
+exercises. Please make sure you are using Nix 2.x or above (ideally 2.1+).
+
+Otherwise you will need to install the following tools using your preferred package
+management tooling:
+- Cabal binary (version 2.2.x)
+- Cabal library (version 2.2.x.y)
+- Glasgow Haskell Compiler (GHC, version 8.4.x)
+- [optional] Haskell IDE Engine for GHC 8.4 (version 0.2.2+ for ghc-8.4.x)
+- [optional] =ghcid= binary (v0.7+)
+- [optional] =hlint= binary (v2.1.8+)
+- [optional] =stylish-haskell= binary (v0.9+)
+
+If not using Nix, you are kind of on your own in terms of official support but if
+you create an issue detailing the issues you experience we will do our best to help
+(at a minimum check if it is a fault of our teaching materials or auxilliary tool
+configuration or something local to the issue creator).
+
+*** Language extension prerequisites
+
+The following Haskell language extensions (as of GHC v8.4.x) will be used throughout
+this course:
+- =NoImplicitPrelude=
+- =InstanceSigs=
+- =OverloadedStrings=
+- =ScopedTypeVariables=
+
+Other language extensions may be introduced on a per file/module basis.
+
+To read more about specific Haskell language extensions you visit the [[https://wiki.haskell.org/Language_extensions][Haskell wiki]].
+
+*** Editor/IDE prerequisites
+
+We assume some familiarity with programming in a modern general purpose programming
+language. While the teaching material is editor/IDE agnostic, we do suggest spending
+time before beginning to configure your favorite editor/IDE with the following:
+
+- syntax highlighting
+- CTAGS (see suggested setups for [[https://courses.cs.washington.edu/courses/cse451/10au/tutorials/tutorial_ctags.html][Emacs and vim here]])
+- hoogle editor integration (or via command-line)
+- auto formatting via =stylish-haskell= (see [[https://github.com/jaspervdj/stylish-haskell#vim-integration][Vim]], [[https://github.com/jaspervdj/stylish-haskell#emacs-integration][Emacs]], [[https://github.com/jaspervdj/stylish-haskell#atom-integration][Atom]], or [[https://github.com/jaspervdj/stylish-haskell#visual-studio-code-integration][VSCode]] integrations)
+- [[https://wiki.haskell.org/Vim#List_of_Plugins][Haskell Vim plugins]]
+- [[https://wiki.haskell.org/Emacs][Haskell Emacs support]]
+- [[http://www.leksah.org][Haskell's Leksah IDE]]
+- [[https://github.com/haskell/haskell-ide-engine][Haskell IDE Engine providing LSP support]]
+
+We assume nothing except basic syntax highlighting and ability to run =cabal= on the
+command-line in your favorite terminal emulator. We also have no OS preference but
+will only work on troubleshooting Nix development environment problems in depth.
+
+*** Learning prerequisites
+
+Be hungry to learn, but also recognize that it will take time practicing via the
+exercises and self-testing your knowledge from the slides and reference material.
+
+Adult learners who have not been enrolled in educational programs for over a year
+may find this [[https://www.coursera.org/learn/learning-how-to-learn][Coursera course titled, 'Learning to Learn']] informative.
+
+We strongly recommend all exercises are attempted by the learner as they proceed
+through the topics available.
+
+*** Repository organization
+
+This repository is organized at a high-level like so:
+
+- =etc/= - contains license and code of conduct information (or other repo metadata)
+- =slides/= - contains slide decks for various topics (see 'Course outline' section
+  below for order suggestions)
+- =reference/= - contains reference materials
+- =src/= - contains source code exercises
+- =test/= - contains test code that will validate the correctness of all your exercise
+  solutions
+- =bench/= - cotnains benchmarks that will validate the efficiency of some of your
+  exercise solutions
+
+** Official Community Forums
+
+- repository: https://github.com/mbbx6spp/effpee
+- issues: https://github.com/mbbx6spp/effpee/issues
+- pull requests: https://github.com/mbbx6spp/effpee/pulls
+
+** Course outline
+
+We recommend the following sequence of material for those learning about typed
+pure functional programming:
+
+TODO: Build sequenced list of slide decks and exercises.
+
+** Checking your solutions are functionally correct
+
+Inside of your loaded Nix shell terminal:
+#+BEGIN_SRC text -n -r
+$ cabal new-run test:all -- --pattern="Effpee.<module>"
+#+END_SRC
+
+Where =<module>= might be something like =ADT=, =Functor=, =Applicative=, =Monoid=,
+=Monad=, etc.
+
+** Checking your solutions for efficiency correctness
+
+Some exercises are testing your algorithmic design or mechanical sympathy with respect
+to fusion, inlining, or specialization.
+
+TODO: document how to run benchmarks that determine algorithmic or efficiency
+correctness.
+
+** Related works and inspirations
+
+TODO: Document where exercises, slide deck or reference materials came from when
+relevant.
+
+Short-list so far:
+- Data61's fp-course
+- @nomeata's Ready Haskell
+- Graham Hutton's Haskell book
+- Richard Bird book on functional pearls of algorithmic design
+

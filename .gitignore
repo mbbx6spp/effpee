@@ -1,0 +1,8 @@
+dist
+dist-newstyle
+.ghc.environment.*
+reference/*.tex
+*.pdf
+*.o
+*.hi
+TAGS
