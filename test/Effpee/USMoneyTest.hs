@@ -19,5 +19,6 @@ suite
     , testCase "evalBills [OneDollar, FiveDollar, FiftyDollar] == 56" $ 56 @=? evalBills (OneDollar :. (FiveDollar :. (FiftyDollar :. Empty)))
     , testCase "evalBills [] == 0" $ 0 @=? evalBills Empty
     , testCase "evalCoins [] == 0" $ 0 @=? evalCoins Empty
+    , testCase "evalCoins [TwoDollarCoin, Penny, Nickel] == 206" $ 206 @=? evalCoins (TwoDollarCoin :. (Penny :. (Nickel :. Empty)))
     ]
 

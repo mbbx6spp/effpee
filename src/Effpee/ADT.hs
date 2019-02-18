@@ -97,6 +97,13 @@ data USBill
 -- * one dollar
 -- * two dollar
 data USCoin
+  = Penny
+  | Nickel
+  | Dime
+  | Quarter
+  | OneDollarCoin
+  | TwoDollarCoin
+  deriving (Enum, Show, Eq)
 
 {-
  ________________________
@@ -116,7 +123,7 @@ a list should remain the same no matter what is inside a list.
 -}
 
 -- TODO define a type constructor that contains exactly one value of type =a=.
-data One a
+data One a = One a
 
 -- A type constructor that can contain one value of type =a= or nothing.
 data Option a
@@ -125,7 +132,7 @@ data Option a
 
 -- TODO define a type constructor that can contain an error value of type =e= or a
 -- success value of type =a=.
-data Or e a
+data Or e a = Failure e | Success a
 
 -- TODO define a type constructor that contains exactly two values of type =a=.
 data Pair a

@@ -13,19 +13,24 @@ module Effpee.USMoney
 import Data.Int
 import Effpee
 import Effpee.ADT
+import GHC.Num    ((+))
 
 evalCoin :: USCoin -> Int
-evalCoin = todo "Effpee.USMoney.evalCoin"
+evalCoin Penny         = 1
+evalCoin Nickel        = 5
+evalCoin Dime          = 10
+evalCoin OneDollarCoin = 100
 
 evalCoins
   :: Many USCoin
   -> Int
-evalCoins Empty = 0
-evalCoins (x :. xs) = todo "Effpee.USMoney.evalCoins"
+evalCoins Empty     = 0
+evalCoins (x :. xs) = evalCoin x + evalCoins xs
 
 evalBill :: USBill -> Int
 evalBill = todo "Effpee.USMoney.evalBill"
 
+-- Use @evalBill@ in this definition
 evalBills
   :: Many USBill
   -> Int
@@ -43,4 +48,4 @@ getPresident
   :: USBill
   -> President
 getPresident FiveDollar = Lincoln -- To get you started with a passing case
-getPresident _ = todo "Effpee.USMoney.getPresident"
+getPresident _          = todo "Effpee.USMoney.getPresident"
