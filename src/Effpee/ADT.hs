@@ -1,6 +1,7 @@
 module Effpee.ADT
   ( Void
   , Unit (..)
+  , Boolean (..)
   , President (..)
   , USCoin (..)
   , USBill (..)
@@ -39,6 +40,8 @@ data Void
 -- A type with exactly one data constructor
 data Unit = Unit
 
+data Boolean = Yeah | Nah deriving (Eq, Show)
+
 {-
  ____________
 < coproducts >
@@ -60,7 +63,8 @@ data Unit = Unit
 -- * Hamilton
 -- * Jackson
 -- * Grant
--- * Franklin
+-- * Franklin (not really a president but we are going with it, maybe I should I named
+--   the type Portrait?)
 data President
   = Washington
   | Jefferson

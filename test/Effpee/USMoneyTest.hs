@@ -1,6 +1,8 @@
 module Effpee.USMoneyTest (suite) where
 
 import Data.Function (($))
+import Effpee
+import Effpee.ADT
 import Effpee.Test
 
 -- module under test
@@ -20,5 +22,7 @@ suite
     , testCase "evalBills [] == 0" $ 0 @=? evalBills Empty
     , testCase "evalCoins [] == 0" $ 0 @=? evalCoins Empty
     , testCase "evalCoins [TwoDollarCoin, Penny, Nickel] == 206" $ 206 @=? evalCoins (TwoDollarCoin :. (Penny :. (Nickel :. Empty)))
+    , testCase "reallyPresident Franklin == Nah" $ Nah @=? reallyPresident Franklin
+    , testCase "reallyPresident Lincoln == Yeah" $ Yeah @=? reallyPresident Lincoln
     ]
 

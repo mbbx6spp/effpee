@@ -4,6 +4,7 @@ module Effpee.USMoney
   ( evalCoins
   , evalBills
   , getPresident
+  , reallyPresident
   , President (..)
   , USCoin (..)
   , USBill (..)
@@ -49,3 +50,8 @@ getPresident
   -> President
 getPresident FiveDollar = Lincoln -- To get you started with a passing case
 getPresident _          = todo "Effpee.USMoney.getPresident"
+
+reallyPresident
+  :: President
+  -> Boolean     -- ^ this is the @Boolean@ from the ADT module NOT the builtin @Bool@ type
+reallyPresident = todo "Effpee.USMoney.reallyPresident"
