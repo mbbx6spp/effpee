@@ -14,7 +14,7 @@ suite
     , testCase "getPresident $2 == Jefferson"   $ Jefferson @=? getPresident TwoDollar
     , testCase "getPresident $5 == Lincoln"     $ Lincoln @=? getPresident FiveDollar
     , testCase "getPresident $10 == Hamilton"   $ Hamilton @=? getPresident TenDollar
-    , testCase "getPresident $20 == Jackson"    $ Jackson @=? getPresident TwoDollar
+    , testCase "getPresident $20 == Jackson"    $ Jackson @=? getPresident TwentyDollar
     , testCase "getPresident $50 == Grant"      $ Grant @=? getPresident FiftyDollar
     , testCase "getPresident $100 == Franklin"  $ Franklin @=? getPresident OneHundredDollar
     , testCase "evalBills [OneDollar, OneHundredDollar] == 101" $ 101 @=? evalBills (OneDollar :. (OneHundredDollar :. Empty))
