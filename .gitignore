@@ -5,4 +5,5 @@ reference/*.tex
 *.pdf
 *.o
 *.hi
+*.swp
 TAGS
