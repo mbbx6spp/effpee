@@ -2,21 +2,25 @@ module Effpee.ADT
   ( Void
   , Unit (..)
   , Boolean (..)
-  , President (..)
+  , Portrait (..)
   , USCoin (..)
   , USBill (..)
+  , One (..)
   , Option (..)
   , Or (..)
   , Pair (..)
   , Many (..)
   , ManyReversed (..)
+  , NonEmpty (..)
   , Deferred (..)
   ) where
 
 import Data.Eq
+import Data.Function ((.))
 import Data.Functor ((<$>))
 import Data.List    (intersperse)
 import GHC.Enum
+import GHC.Generics (Generic)
 import GHC.Show
 
 {-
@@ -40,7 +44,7 @@ data Void
 -- A type with exactly one data constructor
 data Unit = Unit
 
-data Boolean = Yeah | Nah deriving (Eq, Show)
+data Boolean = Yeah | Nah deriving (Eq, Show, Generic)
 
 {-
  ____________
@@ -63,9 +67,8 @@ data Boolean = Yeah | Nah deriving (Eq, Show)
 -- * Hamilton
 -- * Jackson
 -- * Grant
--- * Franklin (not really a president but we are going with it, maybe I should I named
---   the type Portrait?)
-data President
+-- * Franklin
+data Portrait
   = Washington
   | Jefferson
   | Lincoln
@@ -73,7 +76,7 @@ data President
   | Jackson
   | Grant
   | Franklin
-  deriving (Enum, Show, Eq)
+  deriving (Enum, Show, Eq, Generic)
 
 -- Coproduct type representing each type of US bill
 -- * one dollar
@@ -91,7 +94,7 @@ data USBill
   | TwentyDollar
   | FiftyDollar
   | OneHundredDollar
-  deriving (Enum, Show, Eq)
+  deriving (Enum, Show, Eq, Generic)
 
 -- TODO define a coproduct type providing data constructors for each type of US coin
 -- * penny
@@ -126,35 +129,52 @@ strings, or more complex types inside of it at least element. The basic operatio
 a list should remain the same no matter what is inside a list.
 -}
 
--- TODO define a type constructor that contains exactly one value of type =a=.
-data One a = One a
+-- Define a type constructor that contains exactly one value of type =a=.
+data One a = One a deriving (Eq, Show, Generic)
 
 -- A type constructor that can contain one value of type =a= or nothing.
 data Option a
   = Nothing
   | Something a
+  deriving (Eq, Show, Generic)
 
--- TODO define a type constructor that can contain an error value of type =e= or a
+-- Define a type constructor that can contain an error value of type =e= or a
 -- success value of type =a=.
-data Or e a = Failure e | Success a
+data Or e a = Failure e | Success a deriving (Eq, Show, Generic)
 
--- TODO define a type constructor that contains exactly two values of type =a=.
-data Pair a
+-- Define a type constructor that contains exactly two values of type =a=.
+data Pair a = Pair a a deriving (Eq, Show, Generic)
 
 -- A type constructor that contains zero or more values of type =a= with the head of
 -- the structure accessible via pattern matching when more than zero values exist.
 data Many a
   = Empty
   | a :. Many a
-  deriving (Eq)
+  deriving (Eq, Generic)
 
--- TODO define a type constructor that contains zero or more values of type =a=
+-- Define a type constructor that contains zero or more values of type =a=
 -- with the last element of the structure accessible when more than zero values exist.
+-- aka Snoc list
 data ManyReversed a
+  = REmpty
+  | Many a :- a
+  deriving (Eq, Generic)
 
--- TODO define a non-empty sequence of elements of type =a= in terms of =Many a=s.
+-- Define a non-empty sequence of elements of type =a= in terms of =Many a=s.
 data NonEmpty a
+  = a :> Many a
+  deriving (Eq, Generic)
 
--- TODO define a type constructor that contains either a fully evaluated value of type
+-- Define a type constructor that contains either a fully evaluated value of type
 -- =a= or a deferred computation that will produce an =a= from a =Unit=.
 data Deferred a
+  = Lazy (() -> a)
+  | Now a
+  deriving (Generic)
+
+-- Define a binary tree structure parameterized over @a@ with a leaf that has a value
+-- of @a@, a branch with a left and right tree of @a@'s.
+data BinTree a
+  = BinLeaf a
+  | BinBranch { leftBranch :: (BinTree a), rightBranch :: (BinTree a) }
+  deriving (Eq, Generic)
