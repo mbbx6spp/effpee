@@ -3,9 +3,9 @@
 module Effpee.USMoney
   ( evalCoins
   , evalBills
-  , getPresident
-  , reallyPresident
-  , President (..)
+  , getPortrait
+  , isPresident
+  , Portrait (..)
   , USCoin (..)
   , USBill (..)
   , Many (..)
@@ -45,13 +45,13 @@ evalBills = todo "Effpee.USMoney.evalBills"
 -- * $20  => Jackson
 -- * $50  => Grant
 -- * $100 => Franklin
-getPresident
+getPortrait
   :: USBill
-  -> President
-getPresident FiveDollar = Lincoln -- To get you started with a passing case
-getPresident _          = todo "Effpee.USMoney.getPresident"
+  -> Portrait
+getPortrait FiveDollar = Lincoln -- To get you started with a passing case
+getPortrait _          = todo "Effpee.USMoney.getPortrait"
 
-reallyPresident
-  :: President
+isPresident
+  :: Portrait
   -> Boolean     -- ^ this is the @Boolean@ from the ADT module NOT the builtin @Bool@ type
-reallyPresident = todo "Effpee.USMoney.reallyPresident"
+isPresident = todo "Effpee.USMoney.isPresident"
