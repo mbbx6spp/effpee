@@ -16,12 +16,16 @@ module Effpee.ADT
   ) where
 
 import Data.Eq
-import Data.Function ((.))
-import Data.Functor ((<$>))
-import Data.List    (intersperse)
+import Data.Text
+import Effpee
 import GHC.Enum
 import GHC.Generics (Generic)
 import GHC.Show
+
+-- >>> :set -Wno-missing-home-modules
+-- >>> :load src/Effpee/ADT.hs
+-- [2 of 2] Compiling Effpee.ADT       ( src/Effpee/ADT.hs, interpreted )
+-- Ok, two modules loaded.
 
 {-
  _______________________
@@ -44,6 +48,7 @@ data Void
 -- A type with exactly one data constructor
 data Unit = Unit
 
+-- A type with two values: one to signify "true", the other to signify "false"
 data Boolean = Yeah | Nah deriving (Eq, Show, Generic)
 
 {-
@@ -130,27 +135,51 @@ a list should remain the same no matter what is inside a list.
 -}
 
 -- Define a type constructor that contains exactly one value of type =a=.
+-- >>> x = One 15
+-- x :: Num a => One a
+-- >>> y = One "hello"
+-- y :: Data.String.IsString a => One a
 data One a = One a deriving (Eq, Show, Generic)
 
 -- A type constructor that can contain one value of type =a= or nothing.
+-- >>> a0 = Nothing
+-- a0 :: Option a
+-- >>> a1 = Something "Harry"
+-- a1 :: Data.String.IsString a => Option a
+-- >>> a2 = Something "Potter"
+-- a2 :: Data.String.IsString a => Option a
+-- >>> data Wizard = MkWizard Text Text deriving (Show)
+-- data Wizard = ...
 data Option a
   = Nothing
   | Something a
   deriving (Eq, Show, Generic)
 
--- Define a type constructor that can contain an error value of type =e= or a
--- success value of type =a=.
+-- A type constructor that represents either a failure value of type @e@ *or*
+-- a success value of type @a@.
+-- >>> data FileError = FileNotFoundError | NotEnoughPermissionsError | UnknownFileError
+-- data FileError = ...
+-- >>> c = Failure FileNotFoundError
+-- c :: Or FileError a
+-- >>> d = Success "contents of file here!"
+-- d :: Data.String.IsString a => Or e a
 data Or e a = Failure e | Success a deriving (Eq, Show, Generic)
 
 -- Define a type constructor that contains exactly two values of type =a=.
+-- >>> point = Pair 0 0
 data Pair a = Pair a a deriving (Eq, Show, Generic)
 
 -- A type constructor that contains zero or more values of type =a= with the head of
--- the structure accessible via pattern matching when more than zero values exist.
+-- >>> :set -XFlexibleContexts
+-- >>> xs = 1 :. (2 :. (3 :. (4 :. Empty)))
+-- xs :: Num a => Many a
+-- >>> ys = 1 :. 2 :. 3 :. Empty
+-- ys :: Num a => Many a
 data Many a
   = Empty
   | a :. Many a
-  deriving (Eq, Generic)
+  deriving (Eq, Generic, Show)
+infixr 5 :.
 
 -- Define a type constructor that contains zero or more values of type =a=
 -- with the last element of the structure accessible when more than zero values exist.
