@@ -1,7 +1,6 @@
 module Effpee.ManyTest (suite) where
 
 import Effpee.Test
-import Effpee
 
 -- module under test
 import Effpee.Many
@@ -61,53 +60,177 @@ genManySingleton = fromList <$> list (linear 1 1) alpha
                 ||     ||
 -}
 
-headOrDefaultTests = _
+headOrDefaultTests
+  = testGroup "headOrDefault"
+    [ testProperty "headOrDefault produces head when non-empty" $
+      property $
+        do x <- forAll alpha
+           y <- forAll alpha
+           tail <- forAll genMany
+           headOrDefault x (y :. tail) === y
 
-appendTests = _
+    , testProperty "headOrDefault produces default when empty" $
+      property $
+        do x <- forAll alpha
+           headOrDefault x Empty === x
+    ]
 
-toListTests = _
+appendTests
+  = testGroup "append"
+    [ testProperty "headOrDefault on an appended result produces head of the first argument" $
+      property $
+        do def <- forAll alpha
+           xs  <- forAll genMany
+           ys  <- forAll genMany
+           headOrDefault def (append xs ys) === headOrDefault def xs
+    ]
 
-fromListTests = _
+toListTests
+  = testGroup "toList"
+    [ testProperty "fromList . toList == id" $
+      property $
+        do xs <- forAll genMany
+           (fromList . toList) xs === xs
+    ]
 
-dropTests = _
+fromListTests
+  = testGroup "fromList"
+    [ testProperty "toList . fromList == id" $
+      property $
+        do xs <- forAll $ list (linear 1 10) alphaNum
+           (toList . fromList) xs === xs
+    ]
 
-dropWhileTests = _
+dropTests
+  = testGroup "drop"
+    [ testProperty "drop anything on @Empty@ produces @Empty@" $
+      property $
+        do n <- forAll $ int (linear 1 10)
+           drop (toInteger n) Empty === (Empty :: Many Char)
+    , testProperty "drop ((length xs) + 1) xs == Empty" $
+      property $
+        do xs <- forAll genMany
+           let n = (length xs) + 1
+           drop n xs === (Empty :: Many Char)
+    ]
 
-takeTests = _
+dropWhileTests
+  = testGroup "dropWhile"
+    [ testProperty "dropWhile on @Empty@ produces @Empty@" $
+      property $ dropWhile (const False) Empty === (Empty :: Many Char)
+    ]
 
-takeWhileTests = _
+takeTests
+  = testGroup "take"
+    [ testProperty "take on @Empty@ produces @Empty@" $
+      property $
+        do n <- forAll $ int (linear 1 10)
+           take (toInteger n) Empty === (Empty :: Many Char)
+    , testProperty "take ((length xs) + 1) xs == xs" $
+      property $
+        do xs <- forAll genMany
+           let n = toInteger $ (length xs) + 1
+           take n xs === xs
+    , testProperty "length $ take ((length xs) - 1) xs == length xs - 1" $
+      property $
+        do xs <- forAll genMany
+           let n = toInteger $ (length xs) - 1
+           (length (take n xs)) === n
+    ]
 
-partitionTests = _
+takeWhileTests
+  = testGroup "takeWhile"
+    [
+    ]
 
-zipWithTests = _
+partitionTests
+  = testGroup "partition"
+    [
+    ]
 
-foldRTests = _
+zipWithTests
+  = testGroup "zipWith"
+    [
+    ]
 
-foldLTests = _
+foldRTests
+  = testGroup "foldR"
+    [
+    ]
 
-productTests = _
+foldLTests
+  = testGroup "foldL"
+    [
+    ]
 
-product'Tests = _
+productTests
+  = testGroup "product"
+    [
+    ]
 
-sumTests = _
 
-sum'Tests = _
+product'Tests
+  = testGroup "product'"
+    [
+    ]
 
-lengthTests = _
+sumTests
+  = testGroup "sum"
+    [
+    ]
 
-orTests = _
+sum'Tests
+  = testGroup "sum'"
+    [
+    ]
 
-or'Tests = _
+lengthTests
+  = testGroup "length"
+    [
+    ]
 
-andTests = _
 
-and'Tests = _
+orTests
+  = testGroup "or"
+    [
+    ]
 
-transformTests = _
 
-filterTests = _
+or'Tests
+  = testGroup "or'"
+    [
+    ]
 
-singletonTests = _
+
+andTests
+  = testGroup "and"
+    [
+    ]
+
+
+and'Tests
+  = testGroup "and'"
+    [
+    ]
+
+
+transformTests
+  = testGroup "transform"
+    [
+    ]
+
+
+filterTests
+  = testGroup "filter"
+    [
+    ]
+
+
+singletonTests
+  = testGroup "singleton"
+    [
+    ]
+
 
 {-
  _________
@@ -145,6 +268,12 @@ propReverseLengthIsIdLength = property $ do
 
 
 
-flatMapTests = _
+flatMapTests
+  = testGroup "flatMap"
+    [
+    ]
 
-flattenTests = _
+flattenTests
+  = testGroup "flatten"
+    [
+    ]

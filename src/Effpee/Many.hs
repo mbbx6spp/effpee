@@ -1,35 +1,6 @@
 {-# OPTIONS -Wno-orphans #-}
 
-module Effpee.Many
-  ( Many (..)
-  , headOrDefault
-  , append
-  , toList
-  , fromList
-  , drop
-  , dropWhile
-  , take
-  , takeWhile
-  , partition
-  , zipWith
-  , foldR
-  , foldL
-  , product
-  , product'
-  , sum
-  , sum'
-  , length
-  , or
-  , or'
-  , and
-  , and'
-  , transform
-  , filter
-  , singleton
-  , flatMap
-  , flatten
-  , reverse
-  ) where
+module Effpee.Many where
 
 import Data.Int
 import Data.Function ((.))
@@ -204,7 +175,7 @@ sum' = todo "Effpee.Many.sum -- define in terms of foldR."
 -- 3
 length
   :: Many a
-  -> Int
+  -> Integer
 length = todo "Effpee.Many.length -- define only in terms of foldR."
 
 -- | OR-ing a @Many Boolean@ together.

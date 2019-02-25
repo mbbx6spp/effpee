@@ -37,9 +37,12 @@ module Effpee.Test
   -- * Function operators
   , ($)
   , (.)
+  , const
+  , id
   -- * Base types
   , Char
   , Identity
+  , Bool (..)
   -- * Applicative operators
   , (<$>)
   , (<*>)
@@ -47,6 +50,13 @@ module Effpee.Test
   -- * Category operators
   , (>>>)
   , (<<<)
+  -- * GHC.Num
+  , (+)
+  , (*)
+  , (-)
+  -- * GHC.Real
+  , fromIntegral
+  , toInteger
   -- * Effpee.ADT types and data constructors
   , Boolean (..)
   , Deferred (..)
@@ -66,8 +76,9 @@ module Effpee.Test
 
 import           Control.Applicative   (pure, (<$>), (<*>))
 import           Control.Category      ((<<<), (>>>))
+import           Data.Bool             (Bool (..))
 import           Data.Char
-import           Data.Function         (($), (.))
+import           Data.Function         (const, id, ($), (.))
 import           Data.Functor.Identity (Identity)
 import           Effpee.ADT
                  ( Boolean (..)
@@ -83,6 +94,8 @@ import           Effpee.ADT
                  , USCoin (..)
                  )
 import           Effpee.Stream         (Stream (..))
+import           GHC.Num               ((*), (+), (-))
+import           GHC.Real              (fromIntegral, toInteger)
 import qualified Hedgehog
 import qualified Hedgehog.Gen          as Gen
 import qualified Hedgehog.Range        as Range

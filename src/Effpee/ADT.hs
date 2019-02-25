@@ -179,7 +179,7 @@ data Pair a = Pair a a deriving (Eq, Show, Generic)
 data Many a
   = Empty
   | a :. Many a
-  deriving (Eq, Generic)
+  deriving (Generic, Eq)
 infixr 5 :.
 
 -- Define a type constructor that contains zero or more values of type =a=
@@ -188,12 +188,12 @@ infixr 5 :.
 data ManyReversed a
   = REmpty
   | Many a :- a
-  deriving (Eq, Generic)
+  deriving (Generic)
 
 -- Define a non-empty sequence of elements of type =a= in terms of =Many a=s.
 data NonEmpty a
   = a :> Many a
-  deriving (Eq, Generic)
+  deriving (Generic)
 
 -- Define a type constructor that contains either a fully evaluated value of type
 -- =a= or a deferred computation that will produce an =a= from a =Unit=.
