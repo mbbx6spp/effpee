@@ -167,6 +167,7 @@ data Or e a = Failure e | Success a deriving (Eq, Show, Generic)
 
 -- Define a type constructor that contains exactly two values of type =a=.
 -- >>> point = Pair 0 0
+-- point :: Num a => Pair a
 data Pair a = Pair a a deriving (Eq, Show, Generic)
 
 -- A type constructor that contains zero or more values of type =a= with the head of
@@ -178,7 +179,7 @@ data Pair a = Pair a a deriving (Eq, Show, Generic)
 data Many a
   = Empty
   | a :. Many a
-  deriving (Eq, Generic, Show)
+  deriving (Eq, Generic)
 infixr 5 :.
 
 -- Define a type constructor that contains zero or more values of type =a=
