@@ -6,3 +6,8 @@ reference/*.tex
 *.o
 *.hi
 TAGS
+
+# vim swap files
+*~
+*.swp
+*.swo
