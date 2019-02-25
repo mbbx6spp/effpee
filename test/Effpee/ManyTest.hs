@@ -1,20 +1,15 @@
 module Effpee.ManyTest (suite) where
 
-import Data.Char
-import Data.Function (($))
-import Data.Functor.Identity (Identity)
-import Control.Applicative ((<$>), (<*>), pure)
 import Effpee.Test
 
 -- module under test
 import Effpee.Many
 
 suite
-  = testGroup "Effpee.Many"
+  = testGroup "Many"
     [ testProperty "reverse . reverse == identity" propReverseReverseIsId
     , testProperty "reverse == identity when list empty" propReverseIsIdEmpty
     , testProperty "reverse == identity when list singleton" propReverseIsIdSingleton
-    , testProperty "reverse != identity when list not empty and not singleton" propReverseNotId
     , testProperty "length . reverse == length . identity" propReverseLengthIsIdLength
     ]
 
@@ -33,10 +28,6 @@ genManySingleton = fromList <$> list (linear 1 1) alpha
 propReverseReverseIsId = property $ do
   xs <- forAll genMany
   reverse (reverse xs) === xs
-
-propReverseNotId = property $ do
-  xs <- forAll genManyMany
-  reverse xs /== xs
 
 propReverseIsIdEmpty = property $ do
   xs <- forAll genManyEmpty

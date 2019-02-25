@@ -6,6 +6,6 @@ import Effpee.Test
 import Effpee.Or
 
 suite
-  = testGroup "Effpee.Or"
+  = testGroup "Or"
     []
 

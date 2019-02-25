@@ -18,12 +18,15 @@ module Effpee.Test
   , Gen.word64
   , Hedgehog.GenT
   , Range.linear
+  -- * Tasty structures
   , TT.testGroup
   , TTH.testProperty
+  -- * Hedgehog operators
   , (Hedgehog.===)
   , (Hedgehog./==)
   , Hedgehog.property
   , Hedgehog.forAll
+  -- * Tasty TestUnit operators
   , (TTU.@=?)
   , (TTU.@?=)
   , (TTU.@?)
@@ -31,14 +34,59 @@ module Effpee.Test
   , TTU.assertFailure
   , TTU.assertBool
   , TTU.testCase
+  -- * Function operators
   , ($)
+  , (.)
+  -- * Base types
+  , Char
+  , Identity
+  -- * Applicative operators
+  , (<$>)
+  , (<*>)
+  , pure
+  -- * Category operators
+  , (>>>)
+  , (<<<)
+  -- * Effpee.ADT types and data constructors
+  , Boolean (..)
+  , Deferred (..)
+  , Many (..)
+  , ManyReversed (..)
+  , NonEmpty (..)
+  , One (..)
+  , Option (..)
+  , Or (..)
+  , Pair (..)
+  , USBill (..)
+  , USCoin (..)
+  -- * Effpee.Stream types and data constructors
+  , Stream (..)
   ) where
 
 
-import           Data.Function       (($))
+import           Control.Applicative   (pure, (<$>), (<*>))
+import           Control.Category      ((<<<), (>>>))
+import           Data.Char
+import           Data.Function         (($), (.))
+import           Data.Functor.Identity (Identity)
+import           Effpee.ADT
+                 ( Boolean (..)
+                 , Deferred (..)
+                 , Many (..)
+                 , ManyReversed (..)
+                 , NonEmpty (..)
+                 , One (..)
+                 , Option (..)
+                 , Or (..)
+                 , Pair (..)
+                 , USBill (..)
+                 , USCoin (..)
+                 )
+import           Effpee.Stream         (Stream (..))
 import qualified Hedgehog
-import qualified Hedgehog.Gen        as Gen
-import qualified Hedgehog.Range      as Range
-import qualified Test.Tasty          as TT
-import qualified Test.Tasty.Hedgehog as TTH
-import qualified Test.Tasty.HUnit    as TTU
+import qualified Hedgehog.Gen          as Gen
+import qualified Hedgehog.Range        as Range
+import qualified Test.Tasty            as TT
+import qualified Test.Tasty.Hedgehog   as TTH
+import qualified Test.Tasty.HUnit      as TTU
+
