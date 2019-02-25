@@ -21,20 +21,8 @@ headOrDefault
   :: a
   -> Many a
   -> a
-headOrDefault = todo "Effpee.Many.headOrDefault"
-
--- | Append two @Many a@ together in the order they are passed to the function.
--- >>> append (1 :. (2 :. (3 :. Empty))) Empty
--- (1 :. (2 :. (3 :. Empty)))
--- >>> Empty `append` (3 :. (2 :. (1 :. Empty)))
--- (3 :. (2 :. (1 :. Empty)))
--- >>> append (1 :. Empty) (2 :. Empty)
--- (1 :. (2 :. Empty))
-append
-  :: Many a
-  -> Many a
-  -> Many a
-append = todo "Effpee.Many.append"
+headOrDefault defaultValue Empty     = defaultValue
+headOrDefault _ (a :. _)             = a
 
 -- | Converts a @Many a@ to a @[a]@.
 --   Should retain order of elements and length property.
@@ -55,7 +43,25 @@ toList (a :. as) = a : toList as
 fromList
   :: [a]
   -> Many a
-fromList = todo "Effpee.Many.fromList"
+fromList [] = Empty
+fromList (a : as) = a :. fromList as
+
+-- | Append two @Many a@ together in the order they are passed to the function.
+-- >>> append (1 :. (2 :. (3 :. Empty))) Empty
+-- (1 :. (2 :. (3 :. Empty)))
+-- >>> Empty `append` (3 :. (2 :. (1 :. Empty)))
+-- (3 :. (2 :. (1 :. Empty)))
+-- >>> append (1 :. Empty) (2 :. Empty)
+-- (1 :. (2 :. Empty))
+append
+  :: Many a
+  -> Many a
+  -> Many a
+append Empty Empty = Empty
+append Empty xs = xs
+append xs Empty = xs
+append (x :. xs) ys = x :. (xs `append` ys) -- x :. (append xs ys)
+
 
 -- | Drop the first @Integer@ elements in the given @Many a@.
 -- >>> drop 5 Empty
