@@ -80,7 +80,7 @@ appendTests
     [ testProperty "headOrDefault on an appended result produces head of the first argument" $
       property $
         do def <- forAll alpha
-           xs  <- forAll genMany
+           xs  <- forAll genManyMany
            ys  <- forAll genMany
            headOrDefault def (append xs ys) === headOrDefault def xs
     ]
