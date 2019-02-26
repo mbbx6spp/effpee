@@ -1,0 +1,15 @@
+:set -isrc
+:set -itest
+:set prompt "effpee> "
+:set -Wall
+:set -fno-warn-unused-binds
+:set -fno-warn-unused-do-bind
+:set -fno-warn-unused-imports
+:set -fno-warn-type-defaults
+:set -XNoImplicitPrelude
+:set -XScopedTypeVariables
+:set -XOverloadedStrings
+:set -XRebindableSyntax
+:set -XDeriveGeneric
+:l src/Effpee.hs
+:l src/Effpee/ADT.hs

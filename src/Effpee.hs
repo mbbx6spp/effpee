@@ -2,7 +2,7 @@ module Effpee
   ( todo
   , fromString
   , Bool (..)
-  , Generic (..)
+  , Generic
   , Num (..)
   , Show (..)
   , Integer
