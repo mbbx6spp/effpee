@@ -9,7 +9,8 @@
 :set -XNoImplicitPrelude
 :set -XScopedTypeVariables
 :set -XOverloadedStrings
-:set -XRebindableSyntax
 :set -XDeriveGeneric
 :l src/Effpee.hs
 :l src/Effpee/ADT.hs
+import Data.Function (($), (.))
+:def hoogle \x -> pure $ ":!hoogle --count=10 \"" ++ x ++ "\""
