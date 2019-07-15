@@ -2,10 +2,10 @@
 
 module Effpee.Many where
 
-import Data.Int
 import Data.Function ((.))
+import Data.Int
 import Effpee
-import Effpee.ADT (Many (..), Boolean)
+import Effpee.ADT    (Boolean (..), Many (..))
 import GHC.Show
 
 -- only needed for REPL interactions
@@ -15,14 +15,15 @@ instance (Show a) => Show (Many a) where
 -- | Returns the head of the given @Many a@ or the provided default value.
 -- >>> headOrDefault 5 (6 :. Empty)
 -- 6
+-- it :: Num a => a
 -- >>> headOrDefault 5 Empty
 -- 5
+-- it :: Num a => a
 headOrDefault
   :: a
   -> Many a
   -> a
-headOrDefault defaultValue Empty     = defaultValue
-headOrDefault _ (a :. _)             = a
+headOrDefault = todo "Effpee.Many#headOrDefault"
 
 -- | Converts a @Many a@ to a @[a]@.
 --   Should retain order of elements and length property.
@@ -35,16 +36,14 @@ headOrDefault _ (a :. _)             = a
 toList
   :: Many a
   -> [a]
-toList Empty = []
-toList (a :. as) = a : toList as
+toList = todo "Effpee.Many#toList"
 
 -- | Converts a @[a]@ to a @Many a@.
 --   Should retain order of elements and length property.
 fromList
   :: [a]
   -> Many a
-fromList [] = Empty
-fromList (a : as) = a :. fromList as
+fromList = todo "Effpee.Many#fromList"
 
 -- | Append two @Many a@ together in the order they are passed to the function.
 -- >>> append (1 :. (2 :. (3 :. Empty))) Empty
@@ -57,10 +56,7 @@ append
   :: Many a
   -> Many a
   -> Many a
-append Empty Empty = Empty
-append Empty xs = xs
-append xs Empty = xs
-append (x :. xs) ys = x :. (xs `append` ys) -- x :. (append xs ys)
+append = todo "Effpee.Many#append"
 
 
 -- | Drop the first @Integer@ elements in the given @Many a@.
@@ -72,7 +68,7 @@ append (x :. xs) ys = x :. (xs `append` ys) -- x :. (append xs ys)
 -- (2 :. 3 :. 4 :. Empty)
 -- Would this work with /infinite/ lists?
 drop :: Integer -> Many a -> Many a
-drop = todo "Effpee.Many.drop"
+drop = todo "Effpee.Many#drop"
 
 -- | Drop the first elements in the given @Many a@ that do not satisfy the
 -- given predicate function @(a -> Bool)@.
@@ -80,7 +76,7 @@ drop = todo "Effpee.Many.drop"
 -- >>> dropWhile isOdd (13 :. 21 :. 32 :. 41 :. Empty)
 -- (32 :. 41 :. Empty)
 dropWhile :: (a -> Bool) -> Many a -> Many a
-dropWhile = todo "Effpee.Many.dropWhile"
+dropWhile = todo "Effpee.Many#dropWhile"
 
 -- | Take the first @Integer@ elements from the given @Many a@.
 -- >>> take 5 (1 :. 2 :. Empty)
@@ -91,7 +87,7 @@ take
   :: Integer
   -> Many a
   -> Many a
-take = todo "Effpee.Many.take"
+take = todo "Effpee.Many#take"
 
 -- | Take the first elements satisfying the given predicate function @(a -> Bool)@.
 -- >>> takeWhile isOdd (51 :. 53 :. 6 :. 55 :. Empty)
@@ -100,7 +96,7 @@ takeWhile
   :: (a -> Bool)
   -> Many a
   -> Many a
-takeWhile = todo "Effpee.Many.takeWhile"
+takeWhile = todo "Effpee.Many#takeWhile"
 
 -- | Partition the first elements that satisfy the given predicate function
 -- @(a -> Bool)@ from the rest of the given @Many a@, returning a 2-tuple
@@ -112,7 +108,7 @@ partition
   :: (a -> Bool)
   -> Many a
   -> (Many a, Many a)
-partition = todo "Effpee.Many.partition -- define in terms of take* and/or drop*"
+partition = todo "Effpee.Many#partition"
 
 -- | Given a function @(a -> b -> c)@, a @Many a@, and a @Many b@ produce a @Many c@.
 -- >>> zipWith (+) (fromList [1 .. 5]) (fromList [1 .. 3])
@@ -124,7 +120,7 @@ zipWith
   -> Many a
   -> Many b
   -> Many c
-zipWith = todo "Effpee.Many.zipWith -- define using explicit recursion"
+zipWith = todo "Effpee.Many#zipWith"
 
 -- | fold from a seed value starting from the right most element in a @Many a@.
 -- >>> foldR (:.) Empty (1 :. 2 :. 3 :. Empty)
@@ -142,8 +138,16 @@ foldR
   -> b
   -> Many a
   -> b
-foldR _ b Empty = b
-foldR f b (x :. xs) = todo "Effpee.Many.foldR f b (x :. xs) case"
+-- foldR (+) 0 (1 :. 2 :. 3 :. Empty)
+-- foldR (+) 1 (2 :. 3 :. Empty)
+-- foldR (+) 3 (3 :. Empty)
+-- foldR (+) 6 Empty
+-- 6
+-- foldR (:.) Empty (1 :. 2 :. 3 :. Empty)
+-- foldL (flip (:.)) Empty ...
+
+foldR _ b Empty     = b
+foldR f b (x :. xs) = foldR f (f x b) xs
 
 -- | fold from a seed value starting from the first element in a @Many a@.
 -- >>> foldL (+) 0 (1 :. 2 :. Empty)
@@ -153,25 +157,28 @@ foldL
   -> b
   -> Many a
   -> b
-foldL = todo "Effpee.Many.foldL"
+foldL _ b Empty     = b
+foldL f b (x :. xs) = foldL f (f b x) xs -- highly inefficient, in practice use foldl'
 
 -- | Produce the produce of all the elements of a @Many Int@.
 -- >>> product (fromList [1 .. 10])
 -- 3628800
 product :: Many Int -> Int
-product = todo "Effpee.Many.product -- define in terms of explicit recursion."
+product = todo "Effpee.Many#product"
 
 product' :: Many Int -> Int
-product' = todo "Effpee.Many.product -- define in terms of foldR."
+product' = todo "Effpee.Many#product' -- express in terms of foldR"
 
 -- | Sum the elements of the given @Many Int@.
 -- >>> sum (fromList [1 .. 3])
 -- 6
 sum :: Many Int -> Int
-sum = todo "Effpee.Many.sum -- define in terms of explicit recursion."
+sum = todo "Effpee.Many#sum -- express in terms of explicit recursion"
 
+-- >>> sum' (fromList [1 .. 3])
+-- 6
 sum' :: Many Int -> Int
-sum' = todo "Effpee.Many.sum -- define in terms of foldR."
+sum' = todo "Effpee.Many#sum' -- express in terms of foldR"
 
 -- | Computes the length of the sequence of =a=s in a =ManyCons a=.
 -- Should be O(n).
@@ -182,7 +189,7 @@ sum' = todo "Effpee.Many.sum -- define in terms of foldR."
 length
   :: Many a
   -> Integer
-length = todo "Effpee.Many.length -- define only in terms of foldR."
+length = todo "Effpee.Many#length -- express in terms of foldR"
 
 -- | OR-ing a @Many Boolean@ together.
 -- >>> or (Nah :. Yeah :. Empty)
@@ -190,11 +197,12 @@ length = todo "Effpee.Many.length -- define only in terms of foldR."
 -- >>> or Empty
 -- Nah
 or :: Many Boolean -> Boolean
-or = todo "Effpee.Many.or -- can you use foldR?"
+-- TODO What did I do wrong here?
+or = todo "Effpee.Many#or -- express in terms of explicit recursion"
 
 -- | Generalize @or@.
-or' :: (a -> Bool) -> Many a -> Bool
-or' = todo "Effpee.Many.or'"
+or' :: (a -> Bool) -> Many a -> Boolean
+or' = todo "Effpee.Many#or' -- can you express in terms of foldR/FoldL? If so, how?"
 
 -- | AND-ing a @Many Boolean@ together.
 -- >>> and (Yeah :. Nah :. Yeah :. Empty)
@@ -202,11 +210,11 @@ or' = todo "Effpee.Many.or'"
 -- >>> and Empty
 -- Nah
 and :: Many Boolean -> Boolean
-and = todo "Effpee.Many.and -- same question as above. Is there a pattern that you can extract from this?"
+and = todo "Effpee.Many#and -- explicit recursion"
 
 -- | Generalize @and@.
 and' :: (a -> Bool) -> Many a -> Bool
-and' = todo "Effpee.Many.and'"
+and' = todo "Effpee.Many#and' -- how else can ths be expressed?"
 
 -- | Transform each element based on the given function @(a -> b)@.
 -- >>> transform (+1) (1 :. 2 :. 3 :. Empty)
@@ -217,7 +225,7 @@ transform
   :: (a -> b)
   -> Many a
   -> Many b
-transform = todo "Effpee.Many.transform"
+transform = todo "Effpee.Many#transform"
 
 -- | Filter elements out of the @Many a@ that do not meet the predicate criteria.
 -- The predicate function should produce @True@ to keep the element in the result.
@@ -227,7 +235,8 @@ filter
   :: (a -> Bool)
   -> Many a
   -> Many a
-filter = todo "Effpee.Many.filter"
+filter _ Empty     = Empty
+filter f (x :. xs) = todo "Do during the session live"
 
 -- | Produce a singleton @Many a@ from a given @a@ value.
 -- >>> singleton "Victoria"
@@ -235,7 +244,7 @@ filter = todo "Effpee.Many.filter"
 -- >>> singleton 42
 -- (42 :. Empty)
 singleton :: a -> Many a
-singleton = todo "Effpee.Many.singleton"
+singleton a = a :. Empty
 
 -- | Apply the given @(a -> Many b)@ function to each element of the @Many a@ and
 -- then flatten the result into a @Many b@.
@@ -265,4 +274,8 @@ flatten = todo "Effpee.Many.flatten -- define in terms of flatMap"
 reverse
   :: Many a
   -> Many a
-reverse = todo "Effpee.Many.reverse -- define in terms of explicit recursion AND foldR"
+reverse Empty = Empty
+reverse (x :. xs) = reverse xs `append` (x :. Empty)
+
+reverse' :: Many a -> Many a
+reverse' = todo "Effpee.Many#reverse' -- express in terms of foldL and/or foldR"

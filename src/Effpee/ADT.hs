@@ -168,6 +168,8 @@ data Or e a = Failure e | Success a deriving (Eq, Show, Generic)
 -- Define a type constructor that contains exactly two values of type =a=.
 -- >>> point = Pair 0 0
 -- point :: Num a => Pair a
+-- >>> :kind Pair
+-- Pair :: * -> *
 data Pair a = Pair a a deriving (Eq, Show, Generic)
 
 -- A type constructor that contains zero or more values of type =a= with the head of
@@ -208,3 +210,6 @@ data BinTree a
   = BinLeaf a
   | BinBranch { leftBranch :: (BinTree a), rightBranch :: (BinTree a) }
   deriving (Eq, Generic)
+
+-- Represents an F-algebra
+newtype FAlgebra (f :: * -> *) (a :: *) = FAlgebra (a -> f a) deriving (Generic)

@@ -7,8 +7,7 @@ import Effpee.Many
 
 suite
   = testGroup "Many"
-  [ reverseTests
-  , headOrDefaultTests
+  [ headOrDefaultTests
   , appendTests
   , toListTests
   , fromListTests
@@ -134,7 +133,7 @@ takeTests
     , testProperty "length $ take ((length xs) - 1) xs == length xs - 1" $
       property $
         do xs <- forAll genMany
-           let n = toInteger $ (length xs) - 1
+           let n = toInteger $ (length xs)
            (length (take n xs)) === n
     ]
 

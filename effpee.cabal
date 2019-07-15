@@ -1,4 +1,4 @@
-cabal-version:        2.2
+cabal-version:        2.4
 name:                 effpee
 version:              0.1.4
 license:              AGPL-3.0-only
@@ -21,7 +21,13 @@ common base
     base < 5 && >= 4
     , containers >= 0.4
     , array >= 0.4
+    , aeson
+    , bytestring
+    , lens-aeson
+    , lens
     , text
+    , http-types
+    , wai
   ghc-options:
     -Wall
     -Wno-dodgy-exports
@@ -37,6 +43,7 @@ common base
     OverloadedStrings
     ScopedTypeVariables
     DeriveGeneric
+    KindSignatures
   default-language:
     Haskell2010
 
@@ -62,6 +69,7 @@ common tests
     , tasty >= 1
     , tasty-hunit >= 0.9
     , tasty-hedgehog >= 0.2
+    , webdriver
   ghc-options:
     -threaded
   default-extensions:
@@ -71,6 +79,20 @@ common tests
     ScopedTypeVariables
   default-language:
     Haskell2010
+
+common apps
+  build-depends:
+    base < 5 && >= 4
+    , aeson
+    , aeson-lens
+    , bytestring
+    , effpee
+    , http-types
+    , lens
+    , wai
+    , warp
+    , wreq
+
 
 library
   import:
@@ -90,9 +112,22 @@ library
     Effpee.Stream
     Effpee.Functor
     Effpee.Predicate
+    Effpee.Validation
+    -- HTTP modules
+    Effpee.HTTP.Simple
 
 test-suite all
   import: tests
   type: exitcode-stdio-1.0
   hs-source-dirs: test
   main-is: TastyLoader.hs
+
+executable http-simple
+  import: base, apps
+  hs-source-dirs: exe/http-simple
+  main-is: Main.hs
+
+executable webdriver
+  import: tests
+  hs-source-dirs: test
+  main-is: DailyKosTests.hs
