@@ -10,4 +10,4 @@ TAGS
 # vim swap files
 *~
 *.swp
-*.swo
+*.swo*_flymake.hs
