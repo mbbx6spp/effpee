@@ -1,7 +1,7 @@
 { mkDerivation, aeson, aeson-lens, array, base, bytestring
 , containers, hedgehog, http-types, HUnit, lens, lens-aeson, stdenv
-, tasty, tasty-hedgehog, tasty-hunit, text, wai, warp, webdriver
-, wreq
+, tasty, tasty-hedgehog, tasty-hunit, text, text-conversions, wai
+, warp, webdriver, wreq
 }:
 mkDerivation {
   pname = "effpee";
@@ -11,12 +11,12 @@ mkDerivation {
   isExecutable = true;
   libraryHaskellDepends = [
     aeson array base bytestring containers http-types lens lens-aeson
-    text wai
+    text text-conversions wai
   ];
   executableHaskellDepends = [
     aeson aeson-lens array base bytestring containers hedgehog
     http-types HUnit lens lens-aeson tasty tasty-hedgehog tasty-hunit
-    text wai warp webdriver wreq
+    text text-conversions wai warp webdriver wreq
   ];
   testHaskellDepends = [
     base hedgehog HUnit tasty tasty-hedgehog tasty-hunit text webdriver

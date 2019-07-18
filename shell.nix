@@ -1,5 +1,8 @@
+{ ghcVersion ? "ghc864"
+, nixpkgs ? import ./nixpkgs.nix
+}:
 let
-  pkgs = import ./nixpkgs.nix;
+  inherit (nixpkgs) pkgs;
   inherit (pkgs) stdenv callPackage lib;
   inherit (pkgs) texlive;
 
@@ -13,7 +16,7 @@ let
     rev = "19f47e0bf2e2f1a793bf87d64bf8266062f422b1";
   }) { };
 
-  haskellPkgs = pkgs.haskell.packages.ghc844.extend(self: super: {
+  haskellPkgs = pkgs.haskell.packages."${ghcVersion}".extend(self: super: {
     effpee = super.callPackage ./package.nix {};
     Diff = pkgs.haskell.lib.dontCheck super.Diff;
   });
@@ -43,7 +46,6 @@ let
     cabal-install
     stylish-haskell
     stylish-cabal
-    hiePkgs.hie84
     doctest
     hlint
     hoogle

@@ -1,3 +1,5 @@
+{-# LANGUAGE DeriveAnyClass #-}
+
 module Effpee.ADT
   ( Void
   , Unit (..)
@@ -20,7 +22,8 @@ import Data.Text
 import Effpee
 import GHC.Enum
 import GHC.Generics (Generic)
-import GHC.Show
+import Data.Text.Conversions
+import Data.Monoid ((<>))
 
 -- >>> :set -Wno-missing-home-modules
 -- >>> :load src/Effpee/ADT.hs
@@ -49,7 +52,7 @@ data Void
 data Unit = Unit
 
 -- A type with two values: one to signify "true", the other to signify "false"
-data Boolean = Yeah | Nah deriving (Eq, Show, Generic)
+data Boolean = Yeah | Nah deriving (Eq, ToText, Generic)
 
 {-
  ____________
@@ -81,7 +84,7 @@ data Portrait
   | Jackson
   | Grant
   | Franklin
-  deriving (Enum, Show, Eq, Generic)
+  deriving (Enum, ToText, Eq, Generic)
 
 -- Coproduct type representing each type of US bill
 -- * one dollar
@@ -99,7 +102,7 @@ data USBill
   | TwentyDollar
   | FiftyDollar
   | OneHundredDollar
-  deriving (Enum, Show, Eq, Generic)
+  deriving (Enum, ToText, Eq, Generic)
 
 -- TODO define a coproduct type providing data constructors for each type of US coin
 -- * penny
@@ -115,7 +118,7 @@ data USCoin
   | Quarter
   | OneDollarCoin
   | TwoDollarCoin
-  deriving (Enum, Show, Eq)
+  deriving (Enum, ToText, Eq)
 
 {-
  ________________________
@@ -139,7 +142,7 @@ a list should remain the same no matter what is inside a list.
 -- x :: Num a => One a
 -- >>> y = One "hello"
 -- y :: Data.String.IsString a => One a
-data One a = One a deriving (Eq, Show, Generic)
+data One a = One a deriving (Eq, ToText, Generic)
 
 -- A type constructor that can contain one value of type =a= or nothing.
 -- >>> a0 = Nothing
@@ -153,7 +156,7 @@ data One a = One a deriving (Eq, Show, Generic)
 data Option a
   = Nothing
   | Something a
-  deriving (Eq, Show, Generic)
+  deriving (Eq, ToText, Generic)
 
 -- A type constructor that represents either a failure value of type @e@ *or*
 -- a success value of type @a@.
@@ -163,14 +166,14 @@ data Option a
 -- c :: Or FileError a
 -- >>> d = Success "contents of file here!"
 -- d :: Data.String.IsString a => Or e a
-data Or e a = Failure e | Success a deriving (Eq, Show, Generic)
+data Or e a = Failure e | Success a deriving (Eq, ToText, Generic)
 
 -- Define a type constructor that contains exactly two values of type =a=.
 -- >>> point = Pair 0 0
 -- point :: Num a => Pair a
 -- >>> :kind Pair
 -- Pair :: * -> *
-data Pair a = Pair a a deriving (Eq, Show, Generic)
+data Pair a = Pair a a deriving (Eq, ToText, Generic)
 
 -- A type constructor that contains zero or more values of type =a= with the head of
 -- >>> :set -XFlexibleContexts
@@ -203,6 +206,11 @@ data Deferred a
   = Lazy (() -> a)
   | Now a
   deriving (Generic)
+
+instance ToText a => ToText (Deferred a) where
+  toText :: Deferred a -> Text
+  toText (Lazy _) = "Lazy <deferred>"
+  toText (Now a)  = "Now " <> toText a
 
 -- Define a binary tree structure parameterized over @a@ with a leaf that has a value
 -- of @a@, a branch with a left and right tree of @a@'s.

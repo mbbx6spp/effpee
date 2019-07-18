@@ -26,6 +26,7 @@ common base
     , lens-aeson
     , lens
     , text
+    , text-conversions
     , http-types
     , wai
   ghc-options:
@@ -102,6 +103,7 @@ library
   exposed-modules:
     Effpee
     Effpee.ADT
+    Effpee.Debug
     Effpee.USMoney
     Effpee.Option
     Effpee.Many
@@ -126,8 +128,3 @@ executable http-simple
   import: base, apps
   hs-source-dirs: exe/http-simple
   main-is: Main.hs
-
-executable webdriver
-  import: tests
-  hs-source-dirs: test
-  main-is: DailyKosTests.hs

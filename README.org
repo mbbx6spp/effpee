@@ -37,8 +37,8 @@ Otherwise you will need to install the following tools using your preferred pack
 management tooling:
 - Cabal binary (version 2.2.x)
 - Cabal library (version 2.2.x.y)
-- Glasgow Haskell Compiler (GHC, version 8.4.x)
-- [optional] Haskell IDE Engine for GHC 8.4 (version 0.2.2+ for ghc-8.4.x)
+- Glasgow Haskell Compiler (GHC, version 8.6.x)
+- [optional] Haskell IDE Engine for GHC 8.6 (version 0.2.2+ for ghc-8.6.x)
 - [optional] =ghcid= binary (v0.7+)
 - [optional] =hlint= binary (v2.1.8+)
 - [optional] =stylish-haskell= binary (v0.9+)
@@ -50,7 +50,7 @@ configuration or something local to the issue creator).
 
 *** Language extension prerequisites
 
-The following Haskell language extensions (as of GHC v8.4.x) will be used throughout
+The following Haskell language extensions (as of GHC v8.6.x) will be used throughout
 this course:
 - =NoImplicitPrelude=
 - =InstanceSigs=

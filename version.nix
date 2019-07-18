@@ -1,5 +1,6 @@
 {
-  #nixos-unstable as of 2018/08/06
-  url = https://github.com/NixOS/nixpkgs.git;
-  rev = "ce8c243699808355e0a550c7bdebf4ca94f0480d";
+  name = "nixos-19.03-20190529";
+  url = https://github.com/dailykos/nixpkgs.git;
+  rev = "36516712916ebb7475cf3fb5da3a7df6230a60e7";
+  ref = "nixos-19.03";
 }
