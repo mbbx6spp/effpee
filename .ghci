@@ -10,7 +10,12 @@
 :set -XScopedTypeVariables
 :set -XOverloadedStrings
 :set -XDeriveGeneric
+:set -XKindSignatures
+
 :l src/Effpee.hs
 :l src/Effpee/ADT.hs
+
+import Control.Applicative (pure)
 import Data.Function (($), (.))
+import Data.List ((++))
 :def hoogle \x -> pure $ ":!hoogle --count=10 \"" ++ x ++ "\""
