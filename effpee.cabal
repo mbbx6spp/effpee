@@ -90,6 +90,8 @@ common apps
     , effpee
     , http-types
     , lens
+    , io-streams
+    , streaming
     , wai
     , warp
     , wreq
@@ -128,3 +130,15 @@ executable http-simple
   import: base, apps
   hs-source-dirs: exe/http-simple
   main-is: Main.hs
+
+executable streaming
+  import: base, apps
+  hs-source-dirs: exe/streaming
+  other-modules:
+    Effpee.Streaming.Exercises
+  main-is: Main.hs
+
+executable webdriver
+  import: tests
+  hs-source-dirs: test
+  main-is: DailyKosTests.hs
