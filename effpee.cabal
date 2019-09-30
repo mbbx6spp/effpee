@@ -86,12 +86,15 @@ common apps
     base < 5 && >= 4
     , aeson
     , aeson-lens
+    , attoparsec
     , bytestring
     , effpee
     , http-types
     , lens
     , io-streams
     , streaming
+    , streaming-bytestring
+    , streaming-utils
     , wai
     , warp
     , wreq
@@ -136,6 +139,11 @@ executable streaming
   hs-source-dirs: exe/streaming
   other-modules:
     Effpee.Streaming.Exercises
+  ghc-options:
+    -Wall
+    -rtsopts
+    -threaded
+    -fprof-auto
   main-is: Main.hs
 
 executable webdriver
