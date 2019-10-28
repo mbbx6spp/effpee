@@ -89,6 +89,7 @@ common apps
     , attoparsec
     , bytestring
     , effpee
+    , json-stream
     , http-types
     , lens
     , io-streams

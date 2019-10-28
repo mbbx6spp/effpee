@@ -58,7 +58,7 @@ in haskellPkgs.shellFor {
     cabal2nix
     bats
     haskellDevEnv
-    texliveEnv
+    #texliveEnv
     pythonPackages.pygments
     graphviz
     rubyEnv.wrappedRuby
