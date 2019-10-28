@@ -179,3 +179,9 @@ correctness.
 
 TODO: Document where exercises, slide deck or reference materials came from when
 relevant.
+
+Short-list so far:
+- Data61's fp-course
+- @nomeata's Ready Haskell
+- Graham Hutton's Haskell book
+- Richard Bird book on functional pearls of algorithmic design
