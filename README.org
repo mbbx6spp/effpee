@@ -1,26 +1,63 @@
 * Effpee
 
+- https://effpee.susanpotter.net/
+- By Susan Potter ([[https://github.com/mbbx6spp][github:mbbx6spp]], [[https://twitter.com/SusanPotter][@SusanPotter]], me at susanpotter dot net)
+
 ** Purpose
 
 Effpee includes source code examples, teaching exercises, and course materials (e.g.
-slides, cheatsheets).
+slides, cheatsheets) developed by Susan Potter in her spare time based teaching typed
+functional programming with Haskell to mentees and coworkers over the last six
+years.
 
 ** Status
 
 In development.
 
-** Related works and inspirations
+** Copyright & license
 
-TODO: Document where exercises, slide deck or reference materials came from when
-relevant.
+- Copyright &copy; 2017-2019 Susan Potter.
+- Source code and exercises are licensed under the AGPLv3.
+- Slides, reference material and documentation are licensed under the license
+  [[https://creativecommons.org/licenses/by-nc-sa/4.0/][Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)]].
 
-Short-list so far:
-- Data61's fp-course
-- @nomeata's Ready Haskell
-- Graham Hutton's Haskell book
-- Richard Bird book on functional pearls of algorithmic design
+*** Source code licensing summary (AGPLv3)
+
+You can distribute modified versions if you keep track of the changes and the date you
+made them. As per usual with GNU licenses, you must license derivatives under AGPL. It
+provides the same restrictions and freedoms as the GPLv3 but with an additional clause
+which makes it so that source code must be distributed along with web publication.
+Since web sites and services are never distributed in the traditional sense, the AGPL
+is the GPL of the web.
+
+(Taken from TL;DRLegal [[https://tldrlegal.com/license/gnu-affero-general-public-license-v3-(agpl-3.0)][here]]. Local license copy available [[etc/LICENSE-AGPLv3.txt][etc/LICENSE-AGPLv3.txt]].)
+
+*** Documentation licensing summary (CC BY-NC-SA 4.0)
+
+You are free to:
+- *Share*: copy and redistribute the material in any medium or format
+- *Adapt*: remix, transform, and build upon the material
+
+Under the following terms:
+- *Attribution*: You must give appropriate credit, provide a link to the license, and
+  indicate if changes were made. You may do so in any reasonable manner, but not in
+  any way that suggests the licensor endorses you or your use.
+- *NonCommercial*: You may not use the material for commercial purposes.
+- *ShareAlike*: If you remix, transform, or build upon the material, you must
+  distribute your contributions under the same license as the original.
+- *No additional restrictions*: You may not apply legal terms or technological
+  measures that legally restrict others from doing anything the license permits.
 
 ** Getting Started
+
+*** Software Requirements
+
+Assumes you have Nix installed and then:
+#+BEGIN_SRC text -n -r
+$ nix-env -iA cachix -f https://cachix.org/api/v1/install
+$ cachix use mbbx6spp-effpee
+#+END_SRC
+
 
 *** Conduct prerequisites
 
@@ -37,8 +74,8 @@ Otherwise you will need to install the following tools using your preferred pack
 management tooling:
 - Cabal binary (version 2.2.x)
 - Cabal library (version 2.2.x.y)
-- Glasgow Haskell Compiler (GHC, version 8.6.x)
-- [optional] Haskell IDE Engine for GHC 8.6 (version 0.2.2+ for ghc-8.6.x)
+- Glasgow Haskell Compiler (GHC, version 8.4.x)
+- [optional] Haskell IDE Engine for GHC 8.4 (version 0.2.2+ for ghc-8.4.x)
 - [optional] =ghcid= binary (v0.7+)
 - [optional] =hlint= binary (v2.1.8+)
 - [optional] =stylish-haskell= binary (v0.9+)
@@ -50,7 +87,7 @@ configuration or something local to the issue creator).
 
 *** Language extension prerequisites
 
-The following Haskell language extensions (as of GHC v8.6.x) will be used throughout
+The following Haskell language extensions (as of GHC v8.4.x) will be used throughout
 this course:
 - =NoImplicitPrelude=
 - =InstanceSigs=
@@ -110,6 +147,8 @@ This repository is organized at a high-level like so:
 - repository: https://github.com/mbbx6spp/effpee
 - issues: https://github.com/mbbx6spp/effpee/issues
 - pull requests: https://github.com/mbbx6spp/effpee/pulls
+- website: https://effpee.susanpotter.net
+- documentation: https://effpee.susanpotter.net/docs
 
 ** Course outline
 
@@ -136,37 +175,7 @@ to fusion, inlining, or specialization.
 TODO: document how to run benchmarks that determine algorithmic or efficiency
 correctness.
 
-** Copyright & license
+** Related works and inspirations
 
-- Copyright &copy; 2017-2019 Susan Potter.
-- Source code and exercises are licensed under the AGPLv3.
-- Slides, reference material and documentation are licensed under the license
-  [[https://creativecommons.org/licenses/by-nc-sa/4.0/][Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)]].
-
-*** Source code licensing summary (AGPLv3)
-
-You can distribute modified versions if you keep track of the changes and the date you
-made them. As per usual with GNU licenses, you must license derivatives under AGPL. It
-provides the same restrictions and freedoms as the GPLv3 but with an additional clause
-which makes it so that source code must be distributed along with web publication.
-Since web sites and services are never distributed in the traditional sense, the AGPL
-is the GPL of the web.
-
-(Taken from TL;DRLegal [[https://tldrlegal.com/license/gnu-affero-general-public-license-v3-(agpl-3.0)][here]]. Local license copy available [[etc/LICENSE-AGPLv3.txt][etc/LICENSE-AGPLv3.txt]].)
-
-*** Documentation licensing summary (CC BY-NC-SA 4.0)
-
-You are free to:
-- *Share*: copy and redistribute the material in any medium or format
-- *Adapt*: remix, transform, and build upon the material
-
-Under the following terms:
-- *Attribution*: You must give appropriate credit, provide a link to the license, and
-  indicate if changes were made. You may do so in any reasonable manner, but not in
-  any way that suggests the licensor endorses you or your use.
-- *NonCommercial*: You may not use the material for commercial purposes.
-- *ShareAlike*: If you remix, transform, or build upon the material, you must
-  distribute your contributions under the same license as the original.
-- *No additional restrictions*: You may not apply legal terms or technological
-  measures that legally restrict others from doing anything the license permits.
-
+TODO: Document where exercises, slide deck or reference materials came from when
+relevant.
