@@ -50,7 +50,6 @@ let
     hlint
     hoogle
     hasktags
-    hakyll
   ]);
 in haskellPkgs.shellFor {
   packages = p: with p; [ effpee ];
