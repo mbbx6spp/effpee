@@ -9,7 +9,6 @@ import Data.Int
 import Data.List
 import Data.Monoid
 import Data.String
-import Data.String
 
 type Count = Const (Sum Int)
 
@@ -25,8 +24,8 @@ countW = count <<< length <<< words
 countC :: String -> Count a
 countC = count <<< length <<< id
 
-countAll :: Foldable f => f String -> (Count a, (Count b, Count c))
-countAll = foldMap (countL &&& countW &&& countC)
+countAll :: Foldable f => f String -> (Count a, (Count d, (Count b, Count c)))
+countAll = foldMap (countL &&& countW &&& countC &&& countC)
 
 fixture1
   = [ "hello\nworld!"

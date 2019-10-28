@@ -41,7 +41,7 @@ foo' = double `before` incr
 bar' :: Int -> Int
 bar' = incr `before` double
 
--- TODO: Exercise - imoprt Control.Category at the top of the module
+-- TODO: Exercise - import Control.Category at the top of the module
 -- Look at the types of (<<<) and (>>>) and substitute them into the
 -- appropriate foo/foo' and bar/bar' definitions to yield the same
 -- results as `after` and `before`

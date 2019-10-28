@@ -48,8 +48,9 @@ data Month
 deriving instance Ord Month
 
 mkYear :: Int -> Maybe Year
-mkYear n | n < 0 = Just $ Year (-n) BC
-mkYear n = Just $ Year n AD
+mkYear n
+  | n < 0     = Just $ Year (-n) BC
+  | otherwise = Just $ Year n AD
 
 mkMonth :: Int -> Maybe Month
 mkMonth 1  = Just Jan
