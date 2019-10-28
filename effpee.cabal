@@ -123,6 +123,11 @@ library
     -- HTTP modules
     Effpee.HTTP.Simple
 
+    -- Composition module
+    Effpee.Composition.Arrows
+    Effpee.Composition.Functions
+    Effpee.Composition.IndependentEffects
+    --Effpee.Composition.DependentEffects
 test-suite all
   import: tests
   type: exitcode-stdio-1.0
