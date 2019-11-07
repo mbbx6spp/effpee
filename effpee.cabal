@@ -129,6 +129,9 @@ library
     Effpee.Composition.Functions
     Effpee.Composition.IndependentEffects
     --Effpee.Composition.DependentEffects
+
+    -- Universal Algebra / Set Theory
+    Effpee.Algebraic.Set
 test-suite all
   import: tests
   type: exitcode-stdio-1.0

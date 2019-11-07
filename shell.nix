@@ -23,7 +23,7 @@ let
 
   rubyEnv = pkgs.bundlerEnv {
     inherit (pkgs) ruby;
-  
+
     name = "effpee-ruby";
     gemfile   = ./Gemfile;
     lockfile  = ./Gemfile.lock;
@@ -37,7 +37,7 @@ let
               collection-xetex fancyvrb fontspec caption tikz-cd fira
               etoolbox trimspaces environ ulem capt-of wrapfig tcolorbox
               booktabs translator minted fvextra upquote lineno ifplatform
-              xstring framed float;
+              xstring framed float mathtools;
   };
 
   # Add development tools on top of the package dependencies since the package build shouldn't depend on dev tools
@@ -57,7 +57,8 @@ in haskellPkgs.shellFor {
     cabal2nix
     bats
     haskellDevEnv
-    #texliveEnv
+    texliveEnv
+    plantuml
     pythonPackages.pygments
     graphviz
     rubyEnv.wrappedRuby
