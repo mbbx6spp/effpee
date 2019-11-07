@@ -1,0 +1,33 @@
+* Learning Material Progression Plan
+
+The following is for people that want to get started with the basics.
+
+** Basics and Algebraic Data Types
+
+Reference material: https://github.com/mbbx6spp/effpee/blob/release/reference/haskell-cheatsheet.pdf
+
+Exercises:
+- https://github.com/mbbx6spp/effpee/blob/release/src/Effpee/ADT.hs
+- https://github.com/mbbx6spp/effpee/blob/release/src/Effpee/Option.hs#L14
+- https://github.com/mbbx6spp/effpee/blob/release/src/Effpee/Or.hs#L22
+- https://github.com/mbbx6spp/effpee/blob/release/src/Effpee/Or.hs#L25
+- https://github.com/mbbx6spp/effpee/blob/release/src/Effpee/Validation.hs#L33
+- https://github.com/mbbx6spp/effpee/blob/release/src/Effpee/Validation.hs#L36
+- https://github.com/mbbx6spp/effpee/blob/release/src/Effpee/USMoney.hs
+
+** Functors
+
+Reference material: https://github.com/mbbx6spp/effpee/blob/release/reference/functors.pdf
+
+Exercises:
+- https://github.com/mbbx6spp/effpee/blob/release/src/Effpee/Option.hs#L23
+- https://github.com/mbbx6spp/effpee/blob/release/src/Effpee/Or.hs#L29
+- https://github.com/mbbx6spp/effpee/blob/release/src/Effpee/Pair.hs#L19
+
+** Explicit Recursion
+
+Reference material: https://github.com/mbbx6spp/effpee/blob/release/reference/recursion.pdf
+
+Exercises:
+- https://github.com/mbbx6spp/effpee/blob/release/src/Effpee/Many.hs
+- https://github.com/mbbx6spp/effpee/blob/release/src/Effpee/Stream.hs
