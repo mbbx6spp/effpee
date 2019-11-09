@@ -37,7 +37,7 @@ let
               collection-xetex fancyvrb fontspec caption tikz-cd fira
               etoolbox trimspaces environ ulem capt-of wrapfig tcolorbox
               booktabs translator minted fvextra upquote lineno ifplatform
-              xstring framed float mathtools;
+              xstring framed float;
   };
 
   # Add development tools on top of the package dependencies since the package build shouldn't depend on dev tools
@@ -58,7 +58,6 @@ in haskellPkgs.shellFor {
     bats
     haskellDevEnv
     texliveEnv
-    plantuml
     pythonPackages.pygments
     graphviz
     rubyEnv.wrappedRuby
