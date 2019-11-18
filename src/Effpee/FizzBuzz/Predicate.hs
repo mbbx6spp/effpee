@@ -1,4 +1,4 @@
-module Effpee.FizzBuzz where
+module Effpee.FizzBuzz.Predicate where
 
 import Control.Applicative (pure)
 import Control.Monad       (mapM_, (>>=))
@@ -6,7 +6,7 @@ import Data.Bool
 import Data.Function       (($))
 import Data.Int
 import Data.String         (String)
-import Effpee
+import Effpee              hiding (toString)
 import Effpee.ADT
 import Effpee.Or
 import GHC.Show            (show)
@@ -88,6 +88,7 @@ toString (Success a) = show a
 converted :: [String]
 converted = convert <$> list
 
+-- >>> mapM_ print converted
 main :: IO ()
 main = mapM_ print converted
 

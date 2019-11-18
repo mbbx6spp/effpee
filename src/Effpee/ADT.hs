@@ -1,4 +1,7 @@
 {-# LANGUAGE DeriveAnyClass #-}
+{-# LANGUAGE InstanceSigs   #-}
+{-# LANGUAGE DerivingVia    #-}
+
 
 module Effpee.ADT
   ( Void
@@ -18,12 +21,14 @@ module Effpee.ADT
   ) where
 
 import Data.Eq
+import Data.Monoid            ((<>))
 import Data.Text
 import Effpee
+import Generics.Deriving.Show
 import GHC.Enum
-import GHC.Generics (Generic)
-import Data.Text.Conversions
-import Data.Monoid ((<>))
+import GHC.Generics           (Generic)
+import TextShow
+import TextShow.Generic       hiding (One)
 
 -- >>> :set -Wno-missing-home-modules
 -- >>> :load src/Effpee/ADT.hs
@@ -52,7 +57,11 @@ data Void
 data Unit = Unit
 
 -- A type with two values: one to signify "true", the other to signify "false"
-data Boolean = Yeah | Nah deriving (Eq, ToText, Generic)
+data Boolean
+  = Yeah
+  | Nah
+  deriving (Eq, Generic)
+  deriving (TextShow) via FromGeneric (Boolean)
 
 {-
  ____________
@@ -84,7 +93,8 @@ data Portrait
   | Jackson
   | Grant
   | Franklin
-  deriving (Enum, ToText, Eq, Generic)
+  deriving (Enum, Eq, Generic)
+  deriving (TextShow) via FromGeneric (Portrait)
 
 -- Coproduct type representing each type of US bill
 -- * one dollar
@@ -102,7 +112,7 @@ data USBill
   | TwentyDollar
   | FiftyDollar
   | OneHundredDollar
-  deriving (Enum, ToText, Eq, Generic)
+  deriving (Enum, Eq, Generic)
 
 -- TODO define a coproduct type providing data constructors for each type of US coin
 -- * penny
@@ -118,7 +128,7 @@ data USCoin
   | Quarter
   | OneDollarCoin
   | TwoDollarCoin
-  deriving (Enum, ToText, Eq)
+  deriving (Enum, Eq, Generic)
 
 {-
  ________________________
@@ -142,7 +152,9 @@ a list should remain the same no matter what is inside a list.
 -- x :: Num a => One a
 -- >>> y = One "hello"
 -- y :: Data.String.IsString a => One a
-data One a = One a deriving (Eq, ToText, Generic)
+data One a
+  = One a
+  deriving (Eq, Generic)
 
 -- A type constructor that can contain one value of type =a= or nothing.
 -- >>> a0 = Nothing
@@ -156,7 +168,7 @@ data One a = One a deriving (Eq, ToText, Generic)
 data Option a
   = Nothing
   | Something a
-  deriving (Eq, ToText, Generic)
+  deriving (Eq, Generic)
 
 -- A type constructor that represents either a failure value of type @e@ *or*
 -- a success value of type @a@.
@@ -166,14 +178,19 @@ data Option a
 -- c :: Or FileError a
 -- >>> d = Success "contents of file here!"
 -- d :: Data.String.IsString a => Or e a
-data Or e a = Failure e | Success a deriving (Eq, ToText, Generic)
+data Or e a
+  = Failure e
+  | Success a
+  deriving (Eq, Generic)
 
 -- Define a type constructor that contains exactly two values of type =a=.
 -- >>> point = Pair 0 0
 -- point :: Num a => Pair a
 -- >>> :kind Pair
 -- Pair :: * -> *
-data Pair a = Pair a a deriving (Eq, ToText, Generic)
+data Pair a
+  = Pair a a
+  deriving (Eq, Generic)
 
 -- A type constructor that contains zero or more values of type =a= with the head of
 -- >>> :set -XFlexibleContexts
@@ -207,11 +224,6 @@ data Deferred a
   | Now a
   deriving (Generic)
 
-instance ToText a => ToText (Deferred a) where
-  toText :: Deferred a -> Text
-  toText (Lazy _) = "Lazy <deferred>"
-  toText (Now a)  = "Now " <> toText a
-
 -- Define a binary tree structure parameterized over @a@ with a leaf that has a value
 -- of @a@, a branch with a left and right tree of @a@'s.
 data BinTree a
@@ -220,4 +232,6 @@ data BinTree a
   deriving (Eq, Generic)
 
 -- Represents an F-algebra
-newtype FAlgebra (f :: * -> *) (a :: *) = FAlgebra (a -> f a) deriving (Generic)
+newtype FAlgebra (f :: * -> *) (a :: *)
+  = FAlgebra (a -> f a)
+  deriving (Generic)

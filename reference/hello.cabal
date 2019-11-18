@@ -1,0 +1,39 @@
+cabal-version:        2.2
+name:                 hello
+version:              0.1.0
+license:              BSD-3-Clause
+maintainer:           Maintainer Name
+synopsis:             Hello world
+category:             Education
+homepage:             https://example.com/hello
+bug-reports:          https://github.com/example.com/hello
+build-type:           Simple
+tested-with:          GHC == 8.4.4
+
+common base
+  build-depends:
+    base < 5 && >= 4
+  default-language:
+    Haskell2010
+
+library
+  import: base
+  -- hs-source-dirs: lib
+
+executable hello
+  import: base
+  main-is: hello.hs
+  -- hs-source-dirs: exe/hello
+
+test-suite tests
+  import: base
+  type: exitcode-stdio-1.0
+  main-is: tests.hs
+  -- hs-source-dirs: test
+
+
+benchmark bench
+  import: base
+  type: exitcode-stdio-1.0
+  main-is: bench.hs
+  -- hs-source-dirs: bench

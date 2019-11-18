@@ -13,14 +13,36 @@ true t _ = t
 false :: r -> r -> r
 false _ f = f
 
+not
+  :: (p -> b -> a)
+  -> p -- predicate
+  -> b
+  -> a
 not p b a = p b a
 
+or
+  :: ((r -> r -> r) -> p -> q)
+  -> p
+  -> q
 or p q = p true q
 
+and
+  :: (p -> (r -> r -> r) -> q)
+  -> p
+  -> q
 and p q = p q false
 
+xor
+  :: ((p -> b -> a) -> (p -> b -> a) -> t)
+  -> (p -> b -> a)
+  -> t
 xor a b = a (not b) b
 
+ifte
+  :: (p -> a -> b)
+  -> p
+  -> a
+  -> b
 ifte p a b = p a b
 
 newtype Codensity (f :: * -> *) (a :: *)

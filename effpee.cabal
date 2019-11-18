@@ -23,11 +23,16 @@ common base
     , array >= 0.4
     , aeson
     , bytestring
+    , generic-deriving
     , lens-aeson
     , lens
     , text
-    , text-conversions
+    , text-show
+    , time
     , http-types
+    , invariant
+    , semigroupoids
+    , uuid
     , wai
   ghc-options:
     -Wall
@@ -65,6 +70,7 @@ common tests
     effpee
     , base < 5 && >= 4
     , text
+    , text-show
     , HUnit >= 1.5
     , hedgehog >= 0.6.1
     , tasty >= 1
@@ -109,7 +115,6 @@ library
   exposed-modules:
     Effpee
     Effpee.ADT
-    Effpee.Debug
     Effpee.USMoney
     Effpee.Option
     Effpee.Many
@@ -121,6 +126,10 @@ library
     Effpee.Functor
     Effpee.Predicate
     Effpee.Validation
+
+    -- FizzBuzz modules
+    Effpee.FizzBuzz.Predicate
+
     -- HTTP modules
     Effpee.HTTP.Simple
 
@@ -129,6 +138,9 @@ library
     Effpee.Composition.Functions
     Effpee.Composition.IndependentEffects
     --Effpee.Composition.DependentEffects
+
+    -- Transforms exercises
+    Effpee.Transforms.Story
 
     -- Universal Algebra / Set Theory
     Effpee.Algebraic.Set
@@ -148,6 +160,7 @@ executable streaming
   hs-source-dirs: exe/streaming
   other-modules:
     Effpee.Streaming.Exercises
+    Effpee.Streaming.JSON
   ghc-options:
     -Wall
     -rtsopts

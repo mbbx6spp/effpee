@@ -1,7 +1,11 @@
-module Main (main) where
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE PartialTypeSignatures #-}
+
+
+module Main where
 
 import           Control.Applicative
-import           Data.Attoparsec.ByteString           (anyWord8)
+import           Data.Attoparsec.ByteString
 import qualified Data.Attoparsec.ByteString.Char8     as A
 import qualified Data.Attoparsec.ByteString.Streaming as A
 import qualified Data.ByteString.Streaming.Char8      as Q
@@ -11,21 +15,21 @@ import           Data.Int
 import           Data.Maybe
 import           Data.Text
 import           Data.Word
+import qualified Effpee.Streaming.JSON                as JSON
 import           GHC.Show
 import           Streaming
 import qualified Streaming.Prelude                    as S
 import           System.IO                            (IO)
 
 main :: IO ()
-main
+main = void $ JSON.main
+
+main2 :: IO ()
+main2
   = Q.getContents
   & A.parsed apacheLogEntry
   & void
   & S.print
-
-data IP
-  = IPv4 Word8 Word8 Word8 Word8
-  deriving (Show)
 
 data LogEntry
   = MkLogEntry
@@ -40,6 +44,10 @@ data LogEntry
   , userAgent :: UserAgent
   } deriving (Show)
 
+data IP
+  = IPv4 Word8 Word8 Word8 Word8
+  deriving (Show)
+
 type ClientId    = Text
 type Username    = Text
 type Timestamp   = Text
@@ -50,42 +58,19 @@ type Referer     = Text
 type UserAgent   = Text
 
 apacheLogEntry
-  = MkLogEntry
-  <$> parseClientIP
-  <*> pure Nothing
-  <*> pure Nothing
-  <*> parseTimestamp
-  <*> parseRequest
-  <*> parseStatus
-  <*> parseBytes
-  <*> parseReferer
-  <*> parseUserAgent
-
-
-parseClientIP :: A.Parser IP
-parseClientIP
-  = IPv4
-  <$> anyWord8 <* A.char '.'
-  <*> anyWord8 <* A.char '.'
-  <*> anyWord8 <* A.char '.'
-  <*> anyWord8
+  = pure "ignore for now"
+  -- MkLogEntry
+  -- <$> parseClientIP
+  -- <*> pure Nothing
+  -- <*> pure Nothing
+  -- <*> parseTimestamp
+  -- <*> parseRequest
+  -- <*> parseStatus
+  -- <*> parseBytes
+  -- <*> parseReferer
+  -- <*> parseUserAgent
 
 dash = A.char '-'
 
-parseTimestamp :: A.Parser _
-parseTimestamp = _
+testIPAddress = many A.decimal <* optional (A.char '.')
 
-parseRequest :: A.Parser _
-parseRequest = _
-
-parseStatus :: A.Parser _
-parseStatus = _
-
-parseBytes :: A.Parser _
-parseBytes = _
-
-parseReferer :: A.Parser _
-parseReferer = _
-
-parseUserAgent :: A.Parser _
-parseUserAgent = _

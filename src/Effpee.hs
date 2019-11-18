@@ -1,6 +1,5 @@
 module Effpee
   ( todo
-  , fromString
   , Bool (..)
   , (&&)
   , (||)
@@ -11,22 +10,31 @@ module Effpee
   , (<$>)
   , (<*>)
   , (<)
+  , (<<<)
+  , (>>>)
   , id
   , Eq (..)
+  , TextShow (..)
+  , fromString
+  , length
+  , toString
   ) where
 
 import Control.Applicative ((<$>), (<*>))
-import Data.Bool           (Bool (..), (||), (&&))
+import Control.Category    ((<<<), (>>>))
+import Data.Bool           (Bool (..), (&&), (||))
 import Data.Eq             (Eq (..))
-import Data.Function (id)
+import Data.Function       (id)
+import Data.List           (length)
 import Data.Monoid         (mconcat)
 import Data.Ord            ((<))
-import Data.String         (String, fromString)
+import Data.String         (String)
 import Data.Text           (Text, unpack)
 import GHC.Err             (error)
 import GHC.Generics        (Generic)
 import GHC.Num             (Integer, Num (..))
 import GHC.Show            (Show (..))
+import TextShow            (TextShow (..), fromString, toString)
 
 todo :: String -> a
 todo s = error (mconcat ["TODO ", s])

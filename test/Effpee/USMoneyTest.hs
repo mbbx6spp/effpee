@@ -1,11 +1,19 @@
+{-# LANGUAGE StandaloneDeriving #-}
+{-# OPTIONS -fno-warn-orphans     #-}
+
 module Effpee.USMoneyTest (suite) where
 
 import Effpee
 import Effpee.Debug
 import Effpee.Test
+import GHC.Show         (Show (..))
+import TextShow.Generic
 
 -- module under test
 import Effpee.USMoney
+
+deriving instance Show Boolean
+deriving instance Show Portrait
 
 suite
   = testGroup "USMoney"
