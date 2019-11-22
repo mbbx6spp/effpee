@@ -4,7 +4,6 @@
 module Effpee.USMoneyTest (suite) where
 
 import Effpee
-import Effpee.Debug
 import Effpee.Test
 import GHC.Show         (Show (..))
 import TextShow.Generic
