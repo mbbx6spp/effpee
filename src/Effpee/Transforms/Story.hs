@@ -2,6 +2,10 @@
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE InstanceSigs      #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE UndecidableInstances #-}
+
+
 
 module Effpee.Transforms.Story where
 
@@ -10,7 +14,7 @@ import Data.Int
 import Data.List (filter)
 import Data.Maybe
 import Data.Text (Text, words, dropAround, toLower)
-import Data.UUID
+import Data.UUID hiding (toString)
 import Effpee
 import Effpee.ADT (Boolean)
 import GHC.Generics (Generic, Generic1)
@@ -195,15 +199,14 @@ countWords :: Text -> Int
 countWords = length <<< words
 
 
--- >>> let marque = Marquee "This is my beautiful marquee"
+-- >>> let marquee = Marquee "This is my beautiful marquee"
 -- >>> let html = Div [marquee, H1 "My title", Para "This is my first paragraph."]
 -- >>> modernizeHTML html -- strips out marquee
 -- Div [Span "This is my beautiful marquee", H1 "My title", Para "This is my first paragraph."]
 modernizeHTML :: HTML -> HTML
-modernizeHTML = todo "Effpee.Transforms.Story.modernizeHTML"
--- modernizeHTML (Marquee t) = Span t
--- modernizeHTML (Div elems) = Div $ (modernizeHTML <$> elems)
--- modernizeHTML element     = element
+modernizeHTML (Marquee t) = Span t
+modernizeHTML (Div elems) = Div $ (modernizeHTML <$> elems)
+modernizeHTML element     = element
 
 
 -- >>> let textBody = "Donald Trump’s trade war with China is piling up quite a ..."
@@ -218,9 +221,9 @@ modernizeHTML = todo "Effpee.Transforms.Story.modernizeHTML"
 -- 1
 -- Note: there is a function called =replace= from the Data.Text module that might be useful.
 countOcc :: Text -> Text -> Int
-countOcc = todo "Effpee.Transforms.Story.countOcc"
--- countOcc word text = length $ filter (== toLower word) $ words $ toLower $ dropAround punctuation text
---   where punctuation c = c == '.' || c == ','
+-- countOcc = todo "Effpee.Transforms.Story.countOcc"
+countOcc word text = length $ filter (== toLower word) $ words $ toLower $ dropAround punctuation text
+   where punctuation c = c == '.' || c == ','
 
 
 -- TODO: Exercise
@@ -250,3 +253,13 @@ htmlize :: Text -> Maybe HTML
 htmlize = todo "Effpee.Transforms.Story.htmlize"
 
 
+-- For the sake of easier REPL work
+
+instance TextShow a => Show (Story a) where
+  show = toString <<< showb
+
+instance Show HTML where
+  show = toString <<< showb
+
+instance Show StoryContent where
+  show = toString <<< showb
