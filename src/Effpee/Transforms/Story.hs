@@ -7,8 +7,9 @@ module Effpee.Transforms.Story where
 
 import Data.Functor (Functor (..))
 import Data.Int
+import Data.List (filter)
 import Data.Maybe
-import Data.Text (Text, words)
+import Data.Text (Text, words, dropAround, toLower)
 import Data.UUID
 import Effpee
 import Effpee.ADT (Boolean)
@@ -135,6 +136,7 @@ data HTML
     , iframeAllow :: [IFrameCapability]
     , iframeAllowfullscreen :: Boolean }
   deriving (Generic)
+  deriving (TextShow) via FromGeneric HTML
 
 data IFrameCapability
   = Accelerometer
@@ -143,6 +145,7 @@ data IFrameCapability
   | Gyroscope
   | PictureInPicture
   deriving (Generic)
+  deriving (TextShow) via FromGeneric IFrameCapability
 
 -- Fixture data below for examples
 
@@ -185,29 +188,60 @@ defaultEmbedCapabilities
 
 -- Transform functions
 
+
 -- >>> countWords "hello world!\nHow are you doing today?"
 -- 7
 countWords :: Text -> Int
 countWords = length <<< words
 
+
 -- >>> let marque = Marquee "This is my beautiful marquee"
 -- >>> let html = Div [marquee, H1 "My title", Para "This is my first paragraph."]
 -- >>> modernizeHTML html -- strips out marquee
--- Div [H1 "My title", Para "This is my first paragraph."]
+-- Div [Span "This is my beautiful marquee", H1 "My title", Para "This is my first paragraph."]
 modernizeHTML :: HTML -> HTML
 modernizeHTML = todo "Effpee.Transforms.Story.modernizeHTML"
+-- modernizeHTML (Marquee t) = Span t
+-- modernizeHTML (Div elems) = Div $ (modernizeHTML <$> elems)
+-- modernizeHTML element     = element
+
 
 -- >>> let textBody = "Donald Trump’s trade war with China is piling up quite a ..."
 -- >>> countOcc "Trump" textBody
 -- 1
+-- >>> countOcc "Carrots" "I love carrots, but hate spinach."
+-- 1
+-- >>> countOcc "Spinach" "I love carrots, but hate spinach."
+-- 1
+-- TODO: Exercise - make the following case pass:
+-- >>> countOcc "Mary" "Mary's bladder infection caused many logistical problems."
+-- 1
+-- Note: there is a function called =replace= from the Data.Text module that might be useful.
 countOcc :: Text -> Text -> Int
 countOcc = todo "Effpee.Transforms.Story.countOcc"
+-- countOcc word text = length $ filter (== toLower word) $ words $ toLower $ dropAround punctuation text
+--   where punctuation c = c == '.' || c == ','
 
+
+-- TODO: Exercise
 -- >>> redact "Trump" textBody
 -- Donald T####’s trade war with China is piling up quite a ...
 redact :: Text -> Text -> Text
 redact = todo "Effpee.Transforms.Story.redact"
+-- redact "" = id
+-- redact word = _
 
+
+-- TODO: Exercise
+-- >>> expandWidget (URL "https://www.youtube.com/watch?v=rbE53XUtVw0")
+-- Just (IFrame 500 315 (URL "https://www.youtube-nocookie.com/embed/rbE5XUtVw0") 0 defaultEmbedCapabilities Yay)
+-- >>> expandWidget (URL "https://www.example.com/non-widget-url")
+-- Nothing
+expandWidget :: URL -> Maybe HTML
+expandWidget = todo "Effpee.Transforms.Story.embedWidget"
+
+
+-- TODO: Exercise
 -- >>> htmlize "<b?"
 -- Nothing
 -- >>> htmlize "<b>Wow</b>"
@@ -215,9 +249,4 @@ redact = todo "Effpee.Transforms.Story.redact"
 htmlize :: Text -> Maybe HTML
 htmlize = todo "Effpee.Transforms.Story.htmlize"
 
--- >>> expandWidget (URL "https://www.youtube.com/watch?v=rbE53XUtVw0")
--- Just (IFrame 500 315 (URL "https://www.youtube-nocookie.com/embed/rbE5XUtVw0") 0 defaultEmbedCapabilities Yay)
--- >>> expandWidget (URL "https://www.example.com/non-widget-url")
--- Nothing
-expandWidget :: URL -> Maybe HTML
-expandWidget = todo "Effpee.Transforms.Story.embedWidget"
+
