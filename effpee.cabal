@@ -26,6 +26,7 @@ common base
     , generic-deriving
     , lens-aeson
     , lens
+    , mtl
     , text
     , text-show
     , time
@@ -66,6 +67,8 @@ common tests
     Effpee.DeferredTest
     Effpee.StreamTest
     Effpee.FunctorTest
+
+    Effpee.CardsTest
   build-depends:
     effpee
     , base < 5 && >= 4
@@ -127,6 +130,9 @@ library
     Effpee.Predicate
     Effpee.Validation
 
+    -- Illustrative exercises/koans
+    Effpee.Cards
+
     -- FizzBuzz modules
     Effpee.FizzBuzz.Predicate
 
@@ -144,6 +150,7 @@ library
 
     -- Universal Algebra / Set Theory
     Effpee.Algebraic.Set
+
 test-suite all
   import: tests
   type: exitcode-stdio-1.0

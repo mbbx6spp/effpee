@@ -31,3 +31,23 @@ Reference material: https://github.com/mbbx6spp/effpee/blob/release/reference/re
 Exercises:
 - https://github.com/mbbx6spp/effpee/blob/release/src/Effpee/Many.hs
 - https://github.com/mbbx6spp/effpee/blob/release/src/Effpee/Stream.hs
+
+** Cards
+
+The =Effpee.Cards= module and associated test suite are located in files:
+- [[./src/Effpee/Cards.hs][src/Effpee/Cards.hs]]: source code for the Cards practice exercises
+- [[./test/Effpee/CardsTest.hs][test/Effpee/CardsTest.hs]]: test code that checks the =Effpee.Cards= module functionality.
+
+To start you will want to follow the instructions in the first *two* TODOs which
+require you to flesh out the data declaration for a =Suit= in the Cards domain and
+implement `evalColor`.
+
+You will know if you have gotten it right by checking all the tests succeed in the
+corresponding test suite with the command:
+
+#+BEGIN_SRC text
+cabal new-test test:all -- --pattern=Effpee.Cards
+#+END_SRC
+
+After this will will want to follow the TODO prompts in the source file and then the
+test file until there are no more TODOs left to complete.

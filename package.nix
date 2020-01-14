@@ -1,6 +1,6 @@
 { mkDerivation, aeson, aeson-lens, array, attoparsec, base
 , bytestring, containers, generic-deriving, hedgehog, http-types
-, HUnit, invariant, io-streams, json-stream, lens, lens-aeson
+, HUnit, invariant, io-streams, json-stream, lens, lens-aeson, mtl
 , semigroupoids, stdenv, streaming, streaming-bytestring
 , streaming-utils, tasty, tasty-hedgehog, tasty-hunit, text
 , text-show, time, uuid, wai, warp, webdriver, wreq
@@ -13,13 +13,13 @@ mkDerivation {
   isExecutable = true;
   libraryHaskellDepends = [
     aeson array base bytestring containers generic-deriving http-types
-    invariant lens lens-aeson semigroupoids text text-show time uuid
-    wai
+    invariant lens lens-aeson mtl semigroupoids text text-show time
+    uuid wai
   ];
   executableHaskellDepends = [
     aeson aeson-lens array attoparsec base bytestring containers
     generic-deriving hedgehog http-types HUnit invariant io-streams
-    json-stream lens lens-aeson semigroupoids streaming
+    json-stream lens lens-aeson mtl semigroupoids streaming
     streaming-bytestring streaming-utils tasty tasty-hedgehog
     tasty-hunit text text-show time uuid wai warp webdriver wreq
   ];
