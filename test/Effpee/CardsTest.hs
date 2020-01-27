@@ -13,17 +13,17 @@ suite
     , testCase "evalColor Hearts == Red"   $ Red @=? evalColor Hearts
     , testCase "evalColor Clubs == Black"  $ Black @=? evalColor Clubs
     , testCase "evalColor Spades == Black" $ Black @=? evalColor Spades
-    ]
+
     -- scoreCard tests
-    [  -- TODO: write some example-based tests for scoreCard function to give you
-       -- enough confidence that it works given your chosen representation for Card
-    ]
+    -- TODO: write some example-based tests for scoreCard function to give you
+    -- enough confidence that it works given your chosen representation for Card
+
     -- scoreHand tests
-    [  -- TODO: same as above but for scoreHand
-    ]
+    -- TODO: same as above but for scoreHand
+
     -- cardDeckFull tests
-    [  -- TODO: same as above but for cardDeckFull
-    ]
+    -- TODO: same as above but for cardDeckFull
+
     -- cardDeckValid tests
-    [  -- TODO: same as above but for cardDeckValid
+    -- TODO: same as above but for cardDeckValid
     ]
