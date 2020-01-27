@@ -7,6 +7,7 @@ module Effpee
   , Num (..)
   , Show (..)
   , Integer
+  , Int
   , ($)
   , (<$>)
   , (<*>)
@@ -26,6 +27,7 @@ import Control.Category    ((<<<), (>>>))
 import Data.Bool           (Bool (..), (&&), (||))
 import Data.Eq             (Eq (..))
 import Data.Function       (id, ($))
+import Data.Int            (Int)
 import Data.List           (length)
 import Data.Monoid         (mconcat)
 import Data.Ord            ((<))
