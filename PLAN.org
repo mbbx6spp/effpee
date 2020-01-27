@@ -46,7 +46,7 @@ You will know if you have gotten it right by checking all the tests succeed in t
 corresponding test suite with the command:
 
 #+BEGIN_SRC text
-cabal new-test test:all -- --pattern=Effpee.Cards
+cabal new-run test:all -- --pattern=Effpee.Cards
 #+END_SRC
 
 After this will will want to follow the TODO prompts in the source file and then the
