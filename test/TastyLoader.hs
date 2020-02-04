@@ -15,7 +15,7 @@ import qualified Effpee.USMoneyTest  as USMoney
 main :: IO ()
 main =
   defaultMain $
-    testGroup "Tasty"
+    testGroup "Effpee"
       [ ADT.suite
       , USMoney.suite
       , Many.suite
