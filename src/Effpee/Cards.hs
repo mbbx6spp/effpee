@@ -9,7 +9,7 @@ data Color
   = Red
   -- | Black
   | Black
-  deriving (Generic, Show)
+  deriving (Generic, Show, Eq)
 
 -- | Represents the suits in a deck of cards
 -- This should include: clubs, diamonds, hearts, spades
