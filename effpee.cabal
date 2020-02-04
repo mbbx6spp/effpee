@@ -174,8 +174,3 @@ executable streaming
     -threaded
     -fprof-auto
   main-is: Main.hs
-
-executable webdriver
-  import: tests
-  hs-source-dirs: test
-  main-is: DailyKosTests.hs
